@@ -1,0 +1,85 @@
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+log:
+  level: INFO
+
+providers:
+  file:
+    filename: /etc/traefik/traefik.yaml
+    watch: true
+  docker:
+    endpoint: unix:///var/run/docker.sock
+    exposedByDefault: false
+
+tls:
+  options:
+    default:
+      sniStrict: true
+      minVersion: VersionTLS13
+
+api:
+  dashboard: true
+  insecure: true
+  debug: true
+
+certificatesResolvers:
+  letsencryptStaging:
+    acme:
+      storage: /data/acme.json
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+      dnsChallenge:
+        provider: ovh
+        delaybeforecheck: 10
+        disablepropagationcheck: true
+  letsencryptProduction:
+    acme:
+      storage: /data/acme.json
+      caServer: https://acme-v02.api.letsencrypt.org/directory
+      dnsChallenge:
+        provider: ovh
+        delaybeforecheck: 10
+        disablepropagationcheck: true
+entryPoints:
+  web:
+    address: :80
+    http:
+      redirections:
+        entrypoint:
+          to: websecure
+          scheme: https
+
+  websecure:
+    address: :443
+    asDefault: true
+    http:
+      tls:
+        certResolver: letsencryptStaging
+
+serversTransport:
+  insecureSkipVerify: true
+
+http:
+  routers:
+    dashboard:
+      rule: Host(`traefik.{{ secret_domain }}`)
+      entryPoints: ["websecure"]
+      service: api@internal
+    minio:
+      rule: Host(`minio.{{ secret_domain }}`)
+      entryPoints: ["websecure"]
+      service: minio
+    s3:
+      rule: Host(`s3.{{ secret_domain }}`)
+      entryPoints: ["websecure"]
+      service: s3
+  services:
+    minio:
+      loadBalancer:
+        servers:
+          - url: http://{{ ip_minio }}:9001
+    s3:
+      loadBalancer:
+        servers:
+          - url: http://{{ ip_minio }}:9000

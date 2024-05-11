@@ -1,0 +1,42 @@
+global:
+  logging:
+    - type: syslog
+      format: human
+      level: warn
+  monitoring:
+    - type: prometheus
+      listen: ':9811'
+jobs:
+- name: snap_default
+  type: snap
+  filesystems: {
+    "/mnt/vol1<": true,
+    "/mnt/vol1/apps/minio<": false,
+    "/mnt/vol1/video<": false,
+  }
+  snapshotting:
+    type: periodic
+    interval: 60m
+    prefix: zrepl_snap_default_
+    timestamp_format: dense
+  pruning:
+    keep:
+      - type: grid
+        regex: "^zrepl_.*"
+        grid: 1x1h(keep=all) | 24x1h | 35x1d | 6x30d
+- name: snap_minio
+  type: snap
+  filesystems: {
+    "/mnt/vol1/apps/minio<": true,
+    "/mnt/vol1/video<": true,
+  }
+  snapshotting:
+    type: periodic
+    interval: 60m
+    prefix: zrepl_snap_14d_
+    timestamp_format: dense
+  pruning:
+    keep:
+      - type: grid
+        regex: "^zrepl_snap_minio_.*"
+        grid: 1x1h(keep=all) | 24x1h | 17x1d

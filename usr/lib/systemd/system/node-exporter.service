@@ -1,0 +1,36 @@
+[Unit]
+Description=Node-Exporter Container
+After=network-online.target
+Wants=network-online.target
+RequiresMountsFor=%t/containers
+RequiresMountsFor=/
+
+[X-Container]
+Image=quay.io/prometheus/node-exporter:latest
+ContainerName=node-exporter
+Environment=NAME=node-exporter
+
+#flag for autoupdates
+Label=io.containers.autoupdate=registry
+
+Volume=/:/host:ro,rslave
+PodmanArgs=--pid host --privileged
+Exec=--path.rootfs=/host
+Network=host
+
+[Service]
+Restart=always
+Environment=PODMAN_SYSTEMD_UNIT=%n
+KillMode=mixed
+ExecStopPost=-/usr/bin/podman rm -f -i --cidfile=%t/%N.cid
+ExecStopPost=-rm -f %t/%N.cid
+Delegate=yes
+Type=notify
+NotifyAccess=all
+SyslogIdentifier=%N
+ExecStart=/usr/bin/podman run --name=ws --cidfile=%t/%N.cid --replace --rm --cgroups=split --sdnotify=conmon -d -v /:/host --env NAME=ws --label io.containers.autoupdate=registry --pid host --privileged quay.io/cockpit/ws:latest /container/label-run
+TimeoutStartSec=900
+RestartSec=3
+
+[Install]
+WantedBy=default.target
