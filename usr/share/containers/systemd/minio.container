@@ -16,7 +16,6 @@ EnvironmentFile=/etc/minio/config.env
 Environment=MINIO_PROMETHEUS_JOB_ID=minio
 Environment=MINIO_PROMETHEUS_AUTH_TYPE=public
 Environment=MINIO_UPDATE=off
-Network=internal.network
 Image=quay.io/minio/minio:latest
 Exec=server /data --address :9000 --console-address :9001
 User=root:root

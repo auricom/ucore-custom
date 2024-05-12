@@ -9,7 +9,6 @@ RestartSec=3
 [Container]
 AutoUpdate=registry
 ContainerName=resilio-sync-claude
-Network=internal.network
 Image=ghcr.io/auricom/resilio-sync:rolling
 User=root:root
 Volume=/etc/resilio-sync/claude.conf:/app/sync.conf:ro
