@@ -16,7 +16,8 @@ Environment=FB_LOG=stdout
 Environment=FB_ADDRESS=0.0.0.0
 Environment=FB_PORT=7000
 Image=ghcr.io/auricom/filebrowser:rolling
-Volume=filebrowser.volme:/config:bind
+User=root:root
+Volume=filebrowser.volume:/config
 Volume=/var/mnt/vol1:/var/mnt/vol1/:bind
 # Traefik
 Label=traefik.enable="true"
