@@ -55,7 +55,7 @@ entryPoints:
     asDefault: true
     http:
       tls:
-        certResolver: letsencryptStaging
+        certResolver: letsencryptProduction
 
 serversTransport:
   insecureSkipVerify: true
