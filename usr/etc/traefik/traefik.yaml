@@ -63,23 +63,7 @@ serversTransport:
 http:
   routers:
     dashboard:
-      rule: Host(`traefik.{{ secret_domain }}`)
+      rule: Host(`traefik.${SECRET_DOMAIN}`)
       entryPoints: ["websecure"]
       service: api@internal
-    minio:
-      rule: Host(`minio.{{ secret_domain }}`)
-      entryPoints: ["websecure"]
-      service: minio
-    s3:
-      rule: Host(`s3.{{ secret_domain }}`)
-      entryPoints: ["websecure"]
-      service: s3
-  services:
-    minio:
-      loadBalancer:
-        servers:
-          - url: http://{{ ip_minio }}:9001
-    s3:
-      loadBalancer:
-        servers:
-          - url: http://{{ ip_minio }}:9000
+

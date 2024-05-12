@@ -10,9 +10,9 @@ jobs:
 - name: snap_default
   type: snap
   filesystems: {
-    "/mnt/vol1<": true,
-    "/mnt/vol1/apps/minio<": false,
-    "/mnt/vol1/video<": false,
+    "/var/mnt/vol1<": true,
+    "/var/mnt/vol1/apps/minio<": false,
+    "/var/mnt/vol1/video<": false,
   }
   snapshotting:
     type: periodic
@@ -27,8 +27,8 @@ jobs:
 - name: snap_minio
   type: snap
   filesystems: {
-    "/mnt/vol1/apps/minio<": true,
-    "/mnt/vol1/video<": true,
+    "/var/mnt/vol1/apps/minio<": true,
+    "/var/mnt/vol1/video<": true,
   }
   snapshotting:
     type: periodic

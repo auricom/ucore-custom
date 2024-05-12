@@ -6,6 +6,8 @@ Restart=always
 RestartSec=3
 TimeoutStartSec=60
 Environment=SOPS_AGE_KEY_FILE=/root/.config/sops/age/keys.txt
+ExecStartPre=[ -f "/root/.config/sops/age/keys.txt" ] || exit 1
+ExecStartPre=/usr/bin/podman secret rm minio
 ExecStartPre=/usr/bin/sops --config /usr/share/sops/.sops.yaml exec-file /usr/share/minio/config.sops.env "/usr/bin/podman secret create minio {}"
 
 [Container]
@@ -15,8 +17,12 @@ ContainerName=minio
 Environment=MINIO_PROMETHEUS_JOB_ID=minio
 Environment=MINIO_PROMETHEUS_AUTH_TYPE=public
 Environment=MINIO_UPDATE=off
-Secret=minio
-PublishPort=9001:9001
+Secret=minio,type=env,target=MINIO_API_CORS_ALLOW_ORIGIN
+Secret=minio,type=env,target=MINIO_BROWSER_REDIRECT_URL
+Secret=minio,type=env,target=MINIO_PROMETHEUS_URL
+Secret=minio,type=env,target=MINIO_SERVER_URL
+Secret=minio,type=env,target=MINIO_ROOT_USER
+Secret=minio,type=env,target=MINIO_ROOT_PASSWORD
 Image=quay.io/minio/minio:latest
 Exec=server /data --address :9000 --console-address :9001
 User=root:root
