@@ -15,8 +15,8 @@ if [[ -x "/usr/sbin/zpool" ]]; then
 
     # NFS
     # firewall-cmd --permanent --zone=FedoraServer --add-service=nfs
-    firewall-cmd --permanent --zone=FedoraServer --add-service=rpc-bind
-    firewall-cmd --permanent --zone=FedoraServer --add-service=mountd
+    # firewall-cmd --permanent --zone=FedoraServer --add-service=rpc-bind
+    # firewall-cmd --permanent --zone=FedoraServer --add-service=mountd
     systemctl enable nfs-server.service
 
     # Samba
