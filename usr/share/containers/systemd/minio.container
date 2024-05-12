@@ -22,9 +22,11 @@ User=root:root
 Label=traefik.enable="true"
 Label=traefik.http.routers.s3.rule=Host'(`s3.feisar.ovh`)'
 Label=traefik.http.routers.s3.entrypoints="websecure"
+Label=traefik.http.routers.s3.service="s3"
 Label=traefik.http.services.s3.loadbalancer.server.port="9000"
 Label=traefik.http.routers.minio.rule=Host'(`minio.feisar.ovh`)'
 Label=traefik.http.routers.minio.entrypoints="websecure"
+Label=traefik.http.routers.minio.service="minio"
 Label=traefik.http.services.minio.loadbalancer.server.port="9001"
 
 [Install]
