@@ -19,6 +19,9 @@ Volume=/var/mnt/vol1/photo:/sync/photo:bind
 Volume=/var/mnt/vol1/home/claude:/sync/home/claude:bind
 Volume=/var/mnt/vol1/music_transcoded:/sync/music_transcoded:bind
 Volume=/var/mnt/vol1/video:/sync/video:bind
+Label=traefik.http.routers.resilio-sync-claude.rule=Host'(`resilio-sync-claude.feisar.ovh`)'
+Label=traefik.http.routers.resilio-sync-claude.entrypoints="websecure"
+Label=traefik.http.services.resilio-sync-claude.loadbalancer.server.port="8888"
 
 [Install]
 WantedBy=multi-user.target

@@ -17,6 +17,9 @@ Volume=/var/mnt/vol1/backups:/sync/backups:bind
 Volume=/var/mnt/vol1/shared-documents:/sync/shared-documents:bind
 Volume=/var/mnt/vol1/photo:/sync/photo:bind
 Volume=/var/mnt/vol1/home/helene:/sync/helene:bind
+Label=traefik.http.routers.resilio-sync-helene.rule=Host'(`resilio-sync-helene.feisar.ovh`)'
+Label=traefik.http.routers.resilio-sync-helene.entrypoints="websecure"
+Label=traefik.http.services.resilio-sync-helene.loadbalancer.server.port="8888"
 
 [Install]
 WantedBy=multi-user.target

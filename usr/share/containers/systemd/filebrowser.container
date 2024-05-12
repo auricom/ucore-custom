@@ -20,7 +20,7 @@ Volume=filebrowser.volme:/config:bind
 Volume=/var/mnt/vol1:/var/mnt/vol1/:bind
 # Traefik
 Label=traefik.enable="true"
-Label=traefik.http.routers.filebrowser.rule=Host'(`filebrowser.fesair.ovh`)'
+Label=traefik.http.routers.filebrowser.rule=Host'(`filebrowser.feisar.ovh`)'
 Label=traefik.http.routers.filebrowser.entrypoints="websecure"
 Label=traefik.http.services.filebrowser.loadbalancer.server.port="7000"
 
