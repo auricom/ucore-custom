@@ -6,7 +6,7 @@ Restart=always
 RestartSec=3
 TimeoutStartSec=60
 Environment=SOPS_AGE_KEY_FILE=/root/.config/sops/age/keys.txt
-ExecStartPre=[ -f "/root/.config/sops/age/keys.txt" ] || exit 1
+ExecStartPre=/bin/sh -c 'test -f "${SOPS_AGE_KEY_FILE}" || exit 1'
 ExecStartPre=/usr/bin/podman secret rm minio
 ExecStartPre=/usr/bin/sops --config /usr/share/sops/.sops.yaml exec-file /usr/share/minio/config.sops.env "/usr/bin/podman secret create minio {}"
 
