@@ -1,0 +1,29 @@
+[Unit]
+Description=filebrowser provides a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.
+
+[Service]
+TimeoutStartSec=900
+Restart=always
+RestartSec=3
+
+[Container]
+AutoUpdate=registry
+ContainerName=filebrowser
+Environment=TZ=Europe/Paris
+Environment=FB_DATABASE=/config/filebrowser.db
+Environment=FB_ROOT=/var/mnt/vol1/
+Environment=FB_LOG=stdout
+Environment=FB_ADDRESS=0.0.0.0
+Environment=FB_PORT=7000
+Network=internal.network
+Image=ghcr.io/auricom/filebrowser:rolling
+Volume=filebrowser.volme:/config:bind
+Volume=/var/mnt/vol1:/var/mnt/vol1/:bind
+# Traefik
+Label=traefik.enable="true"
+Label=traefik.http.routers.filebrowser.rule=Host'(`filebrowser.fesair.ovh`)'
+Label=traefik.http.routers.filebrowser.entrypoints="websecure"
+Label=traefik.http.services.filebrowser.loadbalancer.server.port="7000"
+
+[Install]
+WantedBy=default.target

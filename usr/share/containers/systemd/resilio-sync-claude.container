@@ -1,0 +1,25 @@
+[Unit]
+Description=Resilio Sync - a fast, reliable file and folder syncing solution for homes and businesses.
+
+[Service]
+TimeoutStartSec=900
+Restart=always
+RestartSec=3
+
+[Container]
+AutoUpdate=registry
+ContainerName=resilio-sync-claude
+Network=internal.network
+Image=ghcr.io/auricom/resilio-sync:rolling
+User=root:root
+Volume=/etc/resilio-sync/claude.conf:/app/sync.conf:ro
+Volume=resilio-sync-claude:/config:z
+Volume=/var/mnt/vol1/backups:/sync/backups:bind
+Volume=/var/mnt/vol1/shared-documents:/sync/shared-documents:bind
+Volume=/var/mnt/vol1/photo:/sync/photo:bind
+Volume=/var/mnt/vol1/home/claude:/sync/home/claude:bind
+Volume=/var/mnt/vol1/music_transcoded:/sync/music_transcoded:bind
+Volume=/var/mnt/vol1/video:/sync/video:bind
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,23 @@
+[Unit]
+Description=Resilio Sync - a fast, reliable file and folder syncing solution for homes and businesses.
+
+[Service]
+TimeoutStartSec=900
+Restart=always
+RestartSec=3
+
+[Container]
+AutoUpdate=registry
+ContainerName=resilio-sync-helene
+Network=internal.network
+Image=ghcr.io/auricom/resilio-sync:rolling
+User=root:root
+Volume=/etc/resilio-sync/helene.conf:/app/sync.conf:ro
+Volume=resilio-sync-helene:/config:z
+Volume=/var/mnt/vol1/backups:/sync/backups:bind
+Volume=/var/mnt/vol1/shared-documents:/sync/shared-documents:bind
+Volume=/var/mnt/vol1/photo:/sync/photo:bind
+Volume=/var/mnt/vol1/home/helene:/sync/helene:bind
+
+[Install]
+WantedBy=multi-user.target

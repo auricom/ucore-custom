@@ -11,6 +11,8 @@ mkdir -p /var/lib/alternatives
 
 rpm-ostree install \
     age \
+    btop \
+    distrobox \
     fish \
     fzf \
     go-task

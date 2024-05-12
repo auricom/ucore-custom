@@ -1,0 +1,27 @@
+[Unit]
+Description=Hard Drive S.M.A.R.T Monitoring, Historical Trends & Real World Failure Thresholds
+
+[Service]
+TimeoutStartSec=900
+Restart=always
+RestartSec=3
+Environment=SOPS_AGE_KEY_FILE=/root/.config/sops/age/keys.txt
+ExecStartPre=/bin/sh -c 'test -f "${SOPS_AGE_KEY_FILE}" || exit 1'
+ExecStartPre=/usr/bin/sops --config /usr/share/sops/.sops.yaml exec-file /usr/share/scrutiny-collector/config.sops.env "cp {} /etc/scrutiny-collector/config.env ; chmod 400 /etc/scrutiny-collector/config.env"
+
+[Container]
+AutoUpdate=registry
+ContainerName=scrutiny-collector
+EnvironmentFile=/etc/scrutiny-collector/config.env
+Image=ghcr.io/analogj/scrutiny:master-collector
+PodmanArgs=--cap-add=SYS_RAWIO
+Volume=/run/udev:/run/udev:ro,rslave
+Volume=/dev/nvme0n1:/dev/nvme0n1:ro,rslave
+Volume=/dev/nvme1n1:/dev/nvme1n1:ro,rslave
+Volume=/dev/sda:/dev/sda:ro,rslave
+Volume=/dev/sdb:/dev/sdb:ro,rslave
+Volume=/dev/sdc:/dev/sdc:ro,rslave
+Volume=/dev/sdd:/dev/sdd:ro,rslave
+
+[Install]
+WantedBy=default.target

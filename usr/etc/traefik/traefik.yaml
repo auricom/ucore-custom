@@ -63,7 +63,6 @@ serversTransport:
 http:
   routers:
     dashboard:
-      rule: Host(`traefik.${SECRET_DOMAIN}`)
+      rule: Host(`traefik-storage.feisar.ovh`)
       entryPoints: ["websecure"]
       service: api@internal
-
