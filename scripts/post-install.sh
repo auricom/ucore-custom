@@ -3,14 +3,7 @@
 set -ouex pipefail
 
 # pre-enabled services
-# systemctl enable cockpit.service
-# systemctl enable node-exporter.service
-# systemctl enable podman.socket
-# systemctl enable podman-exporter.service
-# systemctl enable cockpit.service
-# systemctl enable node-exporter.service
-# systemctl enable podman.socket
-# systemctl enable podman-exporter.service
+systemctl enable podman.socket
 
 if [[ -x "/usr/sbin/zpool" ]]; then
     # ZFS
@@ -21,11 +14,11 @@ if [[ -x "/usr/sbin/zpool" ]]; then
     # firewall-cmd --permanent --zone=FedoraServer --add-service=nfs
     # firewall-cmd --permanent --zone=FedoraServer --add-service=rpc-bind
     # firewall-cmd --permanent --zone=FedoraServer --add-service=mountd
-    # systemctl enable nfs-server.service
+    systemctl enable nfs-server.service
 
     # Samba
     # firewall-cmd --permanent --zone=FedoraServer --add-service=samba
-    # systemctl enable smb.service
+    systemctl enable smb.service
 
     # Firewall / SELinux
     # restorecon -R /mnt/vol1

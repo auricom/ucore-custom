@@ -19,7 +19,7 @@ rpm-ostree install \
 
 rpm-ostree install "https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION#v}.x86_64.rpm"
 
-if [[ -x "/usr/sbin/zpool" ]]; then
+if [ -x "/usr/sbin/zpool" ]; then
     rpm-ostree install \
         nfs-utils \
         samba
