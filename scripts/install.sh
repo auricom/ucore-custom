@@ -12,7 +12,7 @@ mkdir -p /var/lib/alternatives
 rpm-ostree install \
     age \
     btop \
-    container-tools \
+    udica \
     distrobox \
     fish \
     fzf \
