@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -ouex pipefail
 
@@ -24,4 +24,6 @@ if [[ -x "/usr/sbin/zpool" ]]; then
     # restorecon -R /mnt/vol1
     # firewall-cmd --reload
     # semanage fcontext --add --type "public_content_rw_t" "/mnt/vol1(/.*)?"
+    semodule --install /usr/share/minio/selinux.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    semodule --install /usr/share/filebrowser/selinux.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 fi
