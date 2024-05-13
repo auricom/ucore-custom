@@ -18,7 +18,7 @@ Environment=FB_PORT=7000
 Image=ghcr.io/auricom/filebrowser:rolling
 Volume=filebrowser.volume:/config
 Volume=/var/mnt/vol1:/var/mnt/vol1:bind
-SecurityLabelType=filebrowser
+SecurityLabelType=container_runtime_t
 # Traefik
 Label=traefik.enable="true"
 Label=traefik.http.routers.filebrowser.rule=Host'(`filebrowser.feisar.ovh`)'
