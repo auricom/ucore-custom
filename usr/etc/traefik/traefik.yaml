@@ -63,28 +63,6 @@ serversTransport:
 http:
   routers:
     dashboard:
-      # Catch any '/traefik' prefixed path or any request that has got a 'Referer' header set to '/traefik'
-      rule: Host(`storage.feisar.ovh`) && PathPrefix(`/traefik/`) || HeaderRegexp(`Referer`, `.*/traefik/.*`)
-      # this rule should be evaluated before any other potential request to '/api' having no Referer header
-      priority: 999
+      rule: Host(`traefik-storage.feisar.ovh`)
       entryPoints: [websecure]
-      middlewares:
-        - traefik-mid
       service: api@internal
-    zrepl-exporter:
-      rule: Host(`storage.feisar.ovh`) && PathPrefix(`/zrepl-exporter/`)
-      entryPoints: [websecure]
-      service: zrepl-exporter
-
-  middlewares:
-    # Because the traefik api and dashboard have hardcoded path prefixes /api and /dashboard, strip the '/traefik' path prefix.
-    traefik-mid:
-      stripPrefix:
-        prefixes:
-          - /traefik
-
-  services:
-    zrepl-exporter:
-      loadBalancer:
-        servers:
-          - url: http://host.containers.internal:9811
