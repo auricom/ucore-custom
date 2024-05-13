@@ -71,6 +71,10 @@ http:
       middlewares:
         - traefik-mid
       service: api@internal
+    zrepl-exporter:
+      rule: Host(`storage.feisar.ovh`) && PathPrefix(`/zrepl-exporter/`)
+      entryPoints: [websecure]
+      service: zrepl-exporter
 
   middlewares:
     # Because the traefik api and dashboard have hardcoded path prefixes /api and /dashboard, strip the '/traefik' path prefix.
@@ -78,3 +82,9 @@ http:
       stripPrefix:
         prefixes:
           - /traefik
+
+  services:
+    zrepl-exporter:
+      loadBalancer:
+        servers:
+          - url: http://host.containers.internal:9811

@@ -16,13 +16,13 @@ jobs:
   }
   snapshotting:
     type: periodic
-    interval: 60m
+    interval: 720m
     prefix: zrepl_snap_default_
     timestamp_format: dense
   pruning:
     keep:
       - type: grid
-        regex: "^zrepl_.*"
+        regex: ^zrepl_.*
         grid: 1x1h(keep=all) | 24x1h | 35x1d | 6x30d
 - name: snap_minio
   type: snap
@@ -38,5 +38,5 @@ jobs:
   pruning:
     keep:
       - type: grid
-        regex: "^zrepl_snap_minio_.*"
+        regex: ^zrepl_snap_minio_.*
         grid: 1x1h(keep=all) | 24x1h | 17x1d

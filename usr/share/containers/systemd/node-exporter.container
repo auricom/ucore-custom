@@ -14,7 +14,7 @@ Exec=--path.rootfs=/host
 PodmanArgs=--pid=host
 Volume=/:/host:ro,rslave
 Label=traefik.enable="true"
-Label=traefik.http.routers.node-exporter.rule=Host'(`storage.feisar.ovh`) && Path(`/node-exporter`)'
+Label=traefik.http.routers.node-exporter.rule=Host'(`storage.feisar.ovh`) && PathPrefix(`/node-exporter/`)'
 Label=traefik.http.routers.node-exporter.entrypoints="websecure"
 Label=traefik.http.services.node-exporter.loadbalancer.server.port="9100"
 

@@ -17,7 +17,7 @@ SecurityLabelDisable=true
 User=root
 Exec=--collector.enhance-metrics
 Label=traefik.enable="true"
-Label=traefik.http.routers.podman-exporter.rule=Host'(`storage.feisar.ovh`) && Path(`/podman-exporter`)'
+Label=traefik.http.routers.podman-exporter.rule=Host'(`storage.feisar.ovh`) && PathPrefix(`/podman-exporter/`)'
 Label=traefik.http.routers.podman-exporter.entrypoints="websecure"
 Label=traefik.http.services.podman-exporter.loadbalancer.server.port="9882"
 
