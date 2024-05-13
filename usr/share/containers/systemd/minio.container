@@ -18,8 +18,7 @@ Environment=MINIO_PROMETHEUS_AUTH_TYPE=public
 Environment=MINIO_UPDATE=off
 Image=quay.io/minio/minio:latest
 Exec=server /data --address :9000 --console-address :9001
-User=root:root
-Volume=/var/mnt/vol1/apps/minio:/data:z
+Volume=/var/mnt/vol1/apps/minio:/data:bind
 Label=traefik.enable="true"
 Label=traefik.http.routers.s3.rule=Host'(`s3.feisar.ovh`)'
 Label=traefik.http.routers.s3.entrypoints="websecure"
