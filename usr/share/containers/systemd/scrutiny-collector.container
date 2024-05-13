@@ -22,6 +22,7 @@ Volume=/dev/sda:/dev/sda:ro,rslave
 Volume=/dev/sdb:/dev/sdb:ro,rslave
 Volume=/dev/sdc:/dev/sdc:ro,rslave
 Volume=/dev/sdd:/dev/sdd:ro,rslave
+SecurityLabelType=container_runtime_t
 
 [Install]
 WantedBy=default.target

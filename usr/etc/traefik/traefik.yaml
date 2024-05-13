@@ -63,6 +63,18 @@ serversTransport:
 http:
   routers:
     dashboard:
-      rule: Host(`traefik-storage.feisar.ovh`)
-      entryPoints: ["websecure"]
+      # Catch any '/traefik' prefixed path or any request that has got a 'Referer' header set to '/traefik'
+      rule: Host(`storage.feisar.ovh`) && PathPrefix(`/traefik/`) || HeaderRegexp(`Referer`, `.*/traefik/.*`)
+      # this rule should be evaluated before any other potential request to '/api' having no Referer header
+      priority: 999
+      entryPoints: [websecure]
+      middlewares:
+        - traefik-mid
       service: api@internal
+
+  middlewares:
+    # Because the traefik api and dashboard have hardcoded path prefixes /api and /dashboard, strip the '/traefik' path prefix.
+    traefik-mid:
+      stripPrefix:
+        prefixes:
+          - /traefik

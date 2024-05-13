@@ -4,6 +4,7 @@ set -ouex pipefail
 
 # pre-enabled services
 systemctl enable podman.socket
+systemctl enable netavark-firewalld-reload.service
 
 if [[ -x "/usr/sbin/zpool" ]]; then
     # ZFS

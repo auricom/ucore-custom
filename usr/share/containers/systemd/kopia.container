@@ -1,0 +1,30 @@
+[Unit]
+Description=Kopia
+
+[Service]
+TimeoutStartSec=900
+Restart=always
+RestartSec=3
+
+[Container]
+AutoUpdate=registry
+ContainerName=kopia
+Environment=TZ=Europe/Paris
+Image=docker.io/kopia/kopia:0.17.0
+Exec=server start --insecure --address 0.0.0.0:8080 --override-hostname storage.feisar.ovh --override-username claude --without-password --metrics-listen-addr 0.0.0.0:8090
+Volume=/usr/etc/resilio-sync/claude.conf:/app/sync.conf:ro
+Volume=kopia-cache:/app/cache
+Volume=kopia-logs:/app/logs
+Volume=/var/mnt/vol1/apps/minio/kopia:/var/mnt/vol1/apps/minio/kopia
+SecurityLabelType=container_runtime_t
+Label=traefik.enable="true"
+Label=traefik.http.routers.kopia.rule=Host'(`kopia.feisar.ovh`)'
+Label=traefik.http.routers.kopia.entrypoints="websecure"
+Label=traefik.http.routers.kopia.service="kopia"
+Label=traefik.http.services.kopia.loadbalancer.server.port="8080"
+Label=traefik.http.routers.kopia-metrics.rule=Host'(`kopia.feisar.ovh`) && Path(`/metrics`)'
+Label=traefik.http.routers.kopia-metrics.entrypoints="websecure"
+Label=traefik.http.routers.kopia-metrics.service="kopia-metrics"
+Label=traefik.http.services.kopia-metrics.loadbalancer.server.port="8090"
+[Install]
+WantedBy=multi-user.target
