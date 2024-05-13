@@ -13,10 +13,10 @@ Image=ghcr.io/auricom/resilio-sync:rolling
 User=root:root
 Volume=/usr/etc/resilio-sync/helene.conf:/app/sync.conf:ro
 Volume=resilio-sync-helene:/config:z
-Volume=/var/mnt/vol1/backups:/sync/backups:bind
-Volume=/var/mnt/vol1/shared-documents:/sync/shared-documents:bind
-Volume=/var/mnt/vol1/photo:/sync/photo:bind
-Volume=/var/mnt/vol1/home/helene:/sync/helene:bind
+Volume=/var/mnt/vol1/backups:/sync/backups:z
+Volume=/var/mnt/vol1/shared-documents:/sync/shared-documents:z
+Volume=/var/mnt/vol1/photo:/sync/photo:z
+Volume=/var/mnt/vol1/home/helene:/sync/helene:z
 Label=traefik.enable="true"
 Label=traefik.http.routers.resilio-sync-helene.rule=Host'(`resilio-sync-helene.feisar.ovh`)'
 Label=traefik.http.routers.resilio-sync-helene.entrypoints="websecure"
