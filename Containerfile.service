@@ -1,0 +1,20 @@
+FROM ghcr.io/ublue-os/ucore-minimal:stable
+
+COPY .sops.yaml /usr/share/sops/
+
+# Apps - Blocky
+COPY apps/blocky/blocky.container /usr/share/containers/systemd/
+COPY apps/blocky/config/config.yaml /usr/etc/blocky/
+
+# Apps - Traefik
+COPY apps/traefik/traefik.container /usr/share/containers/systemd/
+COPY apps/traefik/traefik.volume /usr/share/containers/systemd/
+COPY apps/traefik/config.sops.env /usr/share/traefik/config.sops.env
+COPY apps/traefik/config/traefik.yaml /usr/etc/traefik/traefik.yaml
+
+COPY systemd /etc/systemd/system/
+
+COPY scripts /tmp/
+
+RUN /tmp/install-common.sh && \
+    ostree container commit

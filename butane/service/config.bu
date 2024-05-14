@@ -1,0 +1,61 @@
+variant: fcos
+version: 1.5.0
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - YOUR_SSH_PUB_KEY_HERE
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINo7E0oAOzaq0XvUHkWvZSC8u1XxX8dDCq3bSyK2BCen
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINRZVQ23ywGUy4PGssAVTlUt8a49FIpFDrW8VG2HWpqV
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFNOwulpxhjCXIGvONU9WmOhdEHHb8Y7/Qa1mxTt9zLz
+storage:
+  directories:
+    # Stamp directory
+    - path: /etc/ucore
+
+    - path: /etc/ucore-autorebase
+      mode: 0754
+  files:
+    # Enable lingering for core
+    - path: /var/lib/systemd/linger/core
+      mode: 0755
+
+    # Hostname
+    - path: /etc/hostname
+      mode: 0644
+      contents:
+        inline: service.feisar.ovh
+
+    # Turn off Stub Listener for systemd-resolved
+    - path: /etc/systemd/resolved.conf.d/stub-listener.conf
+      contents:
+        inline: |
+          [Resolve]
+          DNSStubListener=no
+
+systemd:
+  units:
+    # Autologin on Console
+    - name: serial-getty@ttyS0.service
+      dropins:
+        - name: autologin.conf
+          contents: |
+            [Service]
+            TTYVTDisallocate=no
+            ExecStart=
+            ExecStart=-/usr/sbin/agetty --autologin core --noclear %I $TERM
+    - name: getty@tty1.service
+      dropins:
+        - name: autologin.conf
+          contents: |
+            [Service]
+            ExecStart=
+            ExecStart=-/usr/sbin/agetty --autologin core -o '-p -f core' --noclear %I $TERM
+
+    # Ucore initial setup
+    - name: ucore-autorebase.service
+      contents_local: systemd/ucore-autorebase.service
+      enabled: true
+    - name: ucore-autorebase-signed.service
+      contents_local: systemd/ucore-autorebase-signed.service
+      enabled: true

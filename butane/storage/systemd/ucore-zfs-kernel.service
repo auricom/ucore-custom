@@ -1,0 +1,14 @@
+[Unit]
+Description=uCore activate ZFS kernel module and reboot
+ConditionPathExists=!/etc/ucore/%N.stamp
+
+[Service]
+Type=oneshot
+StandardOutput=journal+console
+RemainAfterExit=yes
+ExecStartPre=/usr/bin/echo "Activate ZFS kernel module"
+ExecStart=/usr/sbin/modprobe zfs
+ExecStartPost=/usr/bin/touch /etc/ucore/%N.stamp
+
+[Install]
+WantedBy=multi-user.target

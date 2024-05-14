@@ -20,8 +20,39 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  generate-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.discover-containerfiles.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Discover Containerfiles
+        id: discover-containerfiles
+        run: |
+          containerfiles=$(ls Containerfile.* | sed 's/Containerfile.//')
+          matrix="{\"include\":["
+          first=true
+          for file in $containerfiles; do
+            if [ "$first" = true ]; then
+              first=false
+            else
+              matrix+=","
+            fi
+            full_image=$(grep '^FROM ' Containerfile.$file | awk '{print $2}')
+            from_image=$(echo $full_image | awk -F/ '{print $NF}' | awk -F: '{print $1}')
+            from_image_tag=$(echo $full_image | awk -F: '{print $2}')
+            matrix+="{\"name\":\"$file\", \"from_image\":\"$from_image\", \"from_image_tag\":\"$from_image_tag\", \"full_image\":\"$full_image\"}"
+          done
+          matrix+="]}"
+          echo "Matrix: $matrix"
+          echo "matrix=$matrix" >> $GITHUB_OUTPUT
+
+
   push-ghcr:
     name: custom image
+    needs: generate-matrix
     runs-on: ubuntu-latest
     # trunk-ignore(checkov/CKV2_GHA_1)
     permissions:
@@ -30,13 +61,7 @@ jobs:
       id-token: write
     strategy:
       fail-fast: false
-      matrix:
-        image_name: [ucore-minimal]
-        tag_name: [stable,stable-zfs]
-        include:
-          - tag_name: stable
-            is_latest_version: true
-            is_stable_version: true
+      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,13 +72,19 @@ jobs:
       - name: Matrix Variables
         shell: bash
         run: |
-          export IMAGE_NAME=${{ matrix.image_name }}
-          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+          export CONTAINERFILE=Containerfile.${{ matrix.name }}
+          export FROM_IMAGE=${{ matrix.from_image }}
+          export FROM_IMAGE_TAG=${{ matrix.from_image_tag }}
+          export FULL_IMAGE=${{ matrix.full_image }}
+          echo "CONTAINERFILE=$CONTAINERFILE" >> $GITHUB_ENV
+          echo "FROM_IMAGE=$FROM_IMAGE" >> $GITHUB_ENV
+          echo "FROM_IMAGE_TAG=$FROM_IMAGE_TAG" >> $GITHUB_ENV
+          echo "FULL_IMAGE=$FULL_IMAGE" >> $GITHUB_ENV
 
       - name: Verify base image
         uses: EyeCantCU/cosign-action/verify@v0.2.2
         with:
-          containers: ${{ env.IMAGE_NAME }}:${{ matrix.tag_name }}
+          containers: ${{ env.FROM_IMAGE }}:${{ env.FROM_IMAGE_TAG }}
 
       - name: Generate tags
         id: generate-tags
@@ -61,7 +92,7 @@ jobs:
         run: |
           # Generate a timestamp for creating an image version history
           TIMESTAMP="$(date +%Y%m%d)"
-          VARIANT="${{ matrix.tag_name }}"
+          VARIANT="${{ matrix.name }}"
 
           COMMIT_TAGS=()
           BUILD_TAGS=()
@@ -71,24 +102,12 @@ jobs:
           COMMIT_TAGS+=("pr-${{ github.event.number }}-${VARIANT}")
           COMMIT_TAGS+=("${SHA_SHORT}-${VARIANT}")
 
-          if [[ "${{ matrix.is_latest_version }}" == "true" ]] && \
-             [[ "${{ matrix.is_stable_version }}" == "true" ]]; then
-              COMMIT_TAGS+=("pr-${{ github.event.number }}")
-              COMMIT_TAGS+=("${SHA_SHORT}")
-          fi
-
           BUILD_TAGS=("${VARIANT}")
 
           # Append matching timestamp tags to keep a version history
           for TAG in "${BUILD_TAGS[@]}"; do
               BUILD_TAGS+=("${TAG}-${TIMESTAMP}")
           done
-
-          if [[ "${{ matrix.is_latest_version }}" == "true" ]] && \
-             [[ "${{ matrix.is_stable_version }}" == "true" ]]; then
-              BUILD_TAGS+=("${TIMESTAMP}")
-              BUILD_TAGS+=("latest")
-          fi
 
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
               echo "Generated the following commit tags: "
@@ -111,7 +130,7 @@ jobs:
       - name: Get current version
         id: labels
         run: |
-          ver=$(skopeo inspect docker://ghcr.io/ublue-os/${{ env.IMAGE_NAME }}:${{ matrix.tag_name }} | jq -r '.Labels["org.opencontainers.image.version"]')
+          ver=$(skopeo inspect docker://${{ env.FULL_IMAGE }} | jq -r '.Labels["org.opencontainers.image.version"]')
           echo "IMAGE_NAME_VERSION=$ver" >> $GITHUB_ENV
 
       # Build metadata
@@ -120,12 +139,12 @@ jobs:
         id: meta
         with:
           images: |
-            ${{ env.IMAGE_NAME }}
+            ${{ env.FROM_IMAGE }}
           labels: |
-            org.opencontainers.image.title=${{ env.IMAGE_NAME }}
+            org.opencontainers.image.title=${{ env.FROM_IMAGE }}
             org.opencontainers.image.version=${{ env.IMAGE_NAME_VERSION }}
-            org.opencontainers.image.description=Custom ${{ matrix.image_name }}
-            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/auricom/ublue-custom/main/README.md
+            org.opencontainers.image.description=Custom ${{ env.FROM_IMAGE }}
+            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/auricom/ucore-custom/main/README.md
 
       # Build image using Buildah action
       - name: Build Image
@@ -133,15 +152,12 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: |
-            ./Containerfile
+            ./${{ env.CONTAINERFILE }}
           # Postfix image name with -custom to make it a little more descriptive
           # Syntax: https://docs.github.com/en/actions/learn-github-actions/expressions#format
-          image: ${{ env.IMAGE_NAME }}
+          image: ${{ env.FROM_IMAGE }}
           tags: |
             ${{ steps.generate-tags.outputs.alias_tags }}
-          build-args: |
-            IMAGE_NAME=${{ matrix.image_name }}
-            IMAGE_TAG=${{ matrix.tag_name }}
           labels: ${{ steps.meta.outputs.labels }}
           oci: false
 
