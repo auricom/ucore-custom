@@ -23,3 +23,5 @@ sudo coreos-installer install /dev/nvme0n1 \
 mkdir -p /root/.config/sops/age
 nano /root/.config/sops/age/keys.txt
 ```
+
+3. Deploy [dotfiles](https://github.com/auricom/dotfiles/tree/main)
