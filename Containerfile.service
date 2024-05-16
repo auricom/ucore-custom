@@ -17,4 +17,6 @@ COPY systemd /etc/systemd/system/
 COPY scripts /tmp/
 
 RUN /tmp/install-common.sh && \
+    /tmp/post-install-common.sh && \
+    /tmp/post-install-service.sh && \
     ostree container commit
