@@ -29,14 +29,14 @@ sudo coreos-installer install /dev/nvme0n1 \
 1. Deploy ucore age key
 
 ```bash
-mkdir -p /root/.config/sops/age
-nano /root/.config/sops/age/keys.txt
+sudo mkdir -p /root/.config/sops/age
+sudo nano /root/.config/sops/age/keys.txt
 ```
 
 2. Change core password
 
 ```bash
-passwd core
+sudo passwd core
 ```
 
 3. Deploy [dotfiles](https://github.com/auricom/dotfiles/tree/main)

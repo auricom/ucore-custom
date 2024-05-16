@@ -13,7 +13,7 @@ COPY apps/node-exporter/node-exporter.container /usr/share/containers/systemd/
 COPY apps/podman-exporter/podman-exporter.container /usr/share/containers/systemd/
 
 # Apps - Scrutiny-collector
-COPY apps/scrutiny-collector/scrutiny-collector.container /usr/share/containers/systemd/
+COPY apps/scrutiny-collector/service.container /usr/share/containers/systemd/scrutiny-collector.container
 COPY apps/scrutiny-collector/service.sops.env /usr/share/scrutiny-collector/config.sops.env
 
 # Apps - Traefik

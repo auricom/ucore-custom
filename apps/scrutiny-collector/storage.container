@@ -7,6 +7,7 @@ Restart=always
 RestartSec=3
 Environment=SOPS_AGE_KEY_FILE=/root/.config/sops/age/keys.txt
 ExecStartPre=/bin/sh -c 'test -f "${SOPS_AGE_KEY_FILE}" || exit 1'
+ExecStartPre=/bin/sh -c 'mkdir -p /etc/scrutiny-collector'
 ExecStartPre=/usr/bin/sops --config /usr/share/sops/.sops.yaml exec-file /usr/share/scrutiny-collector/config.sops.env "cp {} /etc/scrutiny-collector/config.env ; chmod 400 /etc/scrutiny-collector/config.env"
 
 [Container]
