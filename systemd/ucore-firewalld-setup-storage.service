@@ -1,0 +1,26 @@
+[Unit]
+Description=Setup Firewalld Port Forwards
+ConditionFileIsExecutable=/usr/bin/firewall-cmd
+ConditionPathExists=!/etc/ucore/%N.stamp
+After=network-online.target firewalld.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/firewall-cmd --add-service=nfs --permanent
+ExecStart=/usr/bin/firewall-cmd --add-service=rpc-bind --permanent
+ExecStart=/usr/bin/firewall-cmd --add-service=mountd --permanent
+ExecStart=/usr/bin/firewall-cmd --add-service=samba --permanent
+# Zrepl-exporter
+ExecStart=/usr/bin/firewall-cmd --add-port=9811/tcp --permanent
+# Node-exporter
+ExecStart=/usr/bin/firewall-cmd --add-port=9100/tcp --permanent
+# Podman-exporter
+ExecStart=/usr/bin/firewall-cmd --add-port=9882/tcp --permanent
+ExecStart=/usr/bin/firewall-cmd --reload
+# SELinux
+ExecStart=restorecon -R /mnt/vol1
+ExecStart=semanage fcontext --add --type "public_content_rw_t" "/mnt/vol1(/.*)?"
+ExecStartPost=/usr/bin/touch /etc/ucore/%N.stamp
+
+[Install]
+WantedBy=multi-user.target

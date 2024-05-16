@@ -8,7 +8,7 @@ tasks:
     cmd: go-task -l
     silent: true
 
-  butane:
+  ignition:
     desc: Generate from butane
     cmds:
-      - podman run --rm -v ./butane/{{.CLI_ARGS}}:/config:z quay.io/coreos/butane:release --pretty --strict /config/config.bu --files-dir=/config > ./butane/{{.CLI_ARGS}}/config.ign
+      - podman run --rm -v ./:/config:z quay.io/coreos/butane:release --pretty --strict /config/{{.CLI_ARGS}}.bu --files-dir=/config > ./{{.CLI_ARGS}}.ign

@@ -6,13 +6,23 @@ COPY .sops.yaml /usr/share/sops/
 COPY apps/blocky/blocky.container /usr/share/containers/systemd/
 COPY apps/blocky/config/config.yaml /usr/etc/blocky/
 
+# Apps - Node-exporter
+COPY apps/node-exporter/node-exporter.container /usr/share/containers/systemd/
+
+# Apps - Podman-exporter
+COPY apps/podman-exporter/podman-exporter.container /usr/share/containers/systemd/
+
+# Apps - Scrutiny-collector
+COPY apps/scrutiny-collector/scrutiny-collector.container /usr/share/containers/systemd/
+COPY apps/scrutiny-collector/service.sops.env /usr/share/scrutiny-collector/config.sops.env
+
 # Apps - Traefik
 COPY apps/traefik/traefik.container /usr/share/containers/systemd/
 COPY apps/traefik/traefik.volume /usr/share/containers/systemd/
 COPY apps/traefik/config.sops.env /usr/share/traefik/config.sops.env
-COPY apps/traefik/config/traefik.yaml /usr/etc/traefik/traefik.yaml
+COPY apps/traefik/config/service.yaml /usr/etc/traefik/traefik.yaml
 
-COPY systemd /etc/systemd/system/
+COPY systemd/ucore-firewalld-setup-service.service /etc/systemd/system/
 
 COPY scripts /tmp/
 

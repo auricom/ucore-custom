@@ -66,3 +66,12 @@ http:
       rule: Host(`traefik-service.feisar.ovh`)
       entryPoints: [websecure]
       service: api@internal
+    cockpit:
+      rule: Host(`cockpit.feisar.ovh`)
+      entryPoints: [websecure]
+      service: cockpit
+  services:
+    cockpit:
+      loadBalancer:
+        servers:
+          - url: https://host.containers.internal:9090/
