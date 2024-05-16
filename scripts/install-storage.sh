@@ -6,4 +6,5 @@ rpm-ostree install \
     nfs-utils \
     samba
 
+/tmp/apps/cockpit-ws-zfs.sh
 /tmp/apps/zrepl.sh

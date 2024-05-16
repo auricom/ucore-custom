@@ -15,6 +15,7 @@ AutoUpdate=registry
 ContainerName=scrutiny-collector
 EnvironmentFile=/etc/scrutiny-collector/config.env
 Image=ghcr.io/analogj/scrutiny:master-collector
+PodmanArgs=--privileged
 PodmanArgs=--cap-add=SYS_ADMIN
 PodmanArgs=--cap-add=SYS_RAWIO
 Volume=/run/udev:/run/udev:ro,rslave
