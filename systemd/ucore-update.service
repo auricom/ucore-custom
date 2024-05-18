@@ -1,0 +1,7 @@
+[Unit]
+Description=Auto update ucore
+After=local-fs.target
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/rpm-ostree update --reboot

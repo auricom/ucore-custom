@@ -11,11 +11,12 @@ AutoUpdate=registry
 ContainerName=resilio-sync-helene
 Image=ghcr.io/auricom/resilio-sync:rolling
 Volume=/usr/etc/resilio-sync/helene.conf:/app/sync.conf:ro
-Volume=resilio-sync-helene:/config:bind
-Volume=/var/mnt/vol1/backups:/sync/backups:bind
-Volume=/var/mnt/vol1/shared-documents:/sync/shared-documents:bind
-Volume=/var/mnt/vol1/photo:/sync/photo:bind
-Volume=/var/mnt/vol1/home/helene:/sync/helene:bind
+Volume=resilio-sync-helene:/config:rslave
+Volume=/var/mnt/vol1/backups:/sync/backups:rslave
+Volume=/var/mnt/vol1/shared-documents:/sync/shared-documents:rslave
+Volume=/var/mnt/vol1/photo:/sync/photo:rslave
+Volume=/var/mnt/vol1/home/helene:/sync/helene:rslave
+User=root:root
 SecurityLabelType=container_runtime_t
 Label=traefik.enable="true"
 Label=traefik.http.routers.resilio-sync-helene.rule=Host'(`resilio-sync-helene.feisar.ovh`)'

@@ -22,7 +22,9 @@ COPY apps/traefik/traefik.volume /usr/share/containers/systemd/
 COPY apps/traefik/config.sops.env /usr/share/traefik/config.sops.env
 COPY apps/traefik/config/service.yaml /usr/etc/traefik/traefik.yaml
 
+COPY systemd/ucore-update* /etc/systemd/system/
 COPY systemd/ucore-firewalld-setup-service.service /etc/systemd/system/
+COPY systemd/brew* /etc/systemd/system/
 
 COPY scripts /tmp/
 

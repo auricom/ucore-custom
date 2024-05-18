@@ -14,5 +14,3 @@ systemctl enable smb.service
 
 # firwall rules
 systemctl enable ucore-firewalld-setup-storage.service
-
-systemctl disable gssproxy.service
