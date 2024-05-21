@@ -1,5 +1,7 @@
 [Unit]
 Description=Hard Drive S.M.A.R.T Monitoring, Historical Trends & Real World Failure Thresholds
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 TimeoutStartSec=900
@@ -14,7 +16,7 @@ ExecStartPre=/usr/bin/sops --config /usr/share/sops/.sops.yaml exec-file /usr/sh
 AutoUpdate=registry
 ContainerName=scrutiny-collector
 EnvironmentFile=/etc/scrutiny-collector/config.env
-Image=ghcr.io/analogj/scrutiny:master-collector
+Image=ghcr.io/analogj/scrutiny:master-collector@sha256:b1e4063a0186331714b6e8fa545ec88883c313e1ae9df35b600cbf689c73fe8e
 PodmanArgs=--privileged
 PodmanArgs=--cap-add=SYS_ADMIN
 PodmanArgs=--cap-add=SYS_RAWIO

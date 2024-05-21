@@ -1,5 +1,7 @@
 [Unit]
 Description=Prometheus exporter for podman environments exposing containers, pods, images, volumes and networks information.
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 TimeoutStartSec=900
@@ -9,7 +11,7 @@ RestartSec=3
 [Container]
 AutoUpdate=registry
 ContainerName=podman-exporter
-Image=quay.io/navidys/prometheus-podman-exporter:latest
+Image=quay.io/navidys/prometheus-podman-exporter:1.11.1@sha256:cff97b77e16d3af4199ab957a2bd3203c4265288f4067a21f95ece5dcfddbfbf
 Environment=CONTAINER_HOST=unix:///run/podman/podman.sock
 Volume=/run/podman/podman.sock:/run/podman/podman.sock
 Network=host

@@ -1,5 +1,7 @@
 [Unit]
 Description=High-Performance Object Storage system
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Restart=always
@@ -16,7 +18,7 @@ EnvironmentFile=/etc/minio/config.env
 Environment=MINIO_PROMETHEUS_JOB_ID=minio
 Environment=MINIO_PROMETHEUS_AUTH_TYPE=public
 Environment=MINIO_UPDATE=off
-Image=quay.io/minio/minio:latest
+Image=quay.io/minio/minio:RELEASE.2024-05-10T01-41-38Z@sha256:ea0203747a6b779d26ceee879ff9c1d8b70c0d10196a4f969f8ceb4d1e3904bb
 Exec=server /data --address :9000 --console-address :9001
 Volume=/var/mnt/vol1/apps/minio:/data:bind
 IP=10.88.0.100

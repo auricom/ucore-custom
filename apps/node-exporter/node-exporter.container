@@ -1,5 +1,7 @@
 [Unit]
 Description=Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 TimeoutStartSec=900
@@ -9,7 +11,7 @@ RestartSec=3
 [Container]
 AutoUpdate=registry
 ContainerName=node-exporter
-Image=cgr.dev/chainguard/prometheus-node-exporter:latest
+Image=cgr.dev/chainguard/prometheus-node-exporter:latest@sha256:5e9fe23ebae2f28300c41e9574fa7698268578b3e0e246b4588819ace0bdab36
 Exec=--path.rootfs=/host
 PodmanArgs=--pid=host
 Volume=/:/host:ro,rslave

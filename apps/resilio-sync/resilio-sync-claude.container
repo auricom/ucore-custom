@@ -1,5 +1,7 @@
 [Unit]
 Description=Resilio Sync - a fast, reliable file and folder syncing solution for homes and businesses.
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 TimeoutStartSec=900
@@ -9,7 +11,7 @@ RestartSec=3
 [Container]
 AutoUpdate=registry
 ContainerName=resilio-sync-claude
-Image=ghcr.io/auricom/resilio-sync:rolling
+Image=ghcr.io/auricom/resilio-sync:2.8.0@sha256:b30f6084396dbb4cbd0d4416580c8f7f9065fcc947ffae6e5d2067beb4f190bb
 Volume=/usr/etc/resilio-sync/claude.conf:/app/sync.conf:ro
 Volume=resilio-sync-claude:/config:rslave
 Volume=/var/mnt/vol1/backups:/sync/backups:rslave
