@@ -1,0 +1,56 @@
+endpoints:
+  - name: OPNsense
+    group: ICMP
+    url: icmp://192.168.8.1
+    conditions: ["[CONNECTED] == true"]
+    alerts: [{ type: pushover }]
+  - name: Unifi SW8
+    group: ICMP
+    url: icmp://192.168.8.10
+    conditions: ["[CONNECTED] == true"]
+    alerts: [{ type: pushover }]
+  - name: Unifi AP AC Pro
+    group: ICMP
+    url: icmp://192.168.8.20
+    conditions: ["[CONNECTED] == true"]
+    alerts: [{ type: pushover }]
+  - name: PiKVM
+    group: ICMP
+    url: icmp://192.168.8.200
+    conditions: ["[CONNECTED] == true"]
+    alerts: [{ type: pushover }]
+  - name: storage
+    group: ICMP
+    url: icmp://192.168.9.10
+    conditions: ["[CONNECTED] == true"]
+    alerts: [{ type: pushover }]
+  - name: philips-hue
+    group: ICMP
+    url: icmp://192.168.9.90
+    conditions: ["[CONNECTED] == true"]
+    alerts: [{ type: pushover }]
+  - name: talos-node-1
+    group: ICMP
+    url: icmp://192.168.9.101
+    conditions: ["[CONNECTED] == true"]
+    alerts: [{ type: pushover }]
+  - name: talos-node-2
+    group: ICMP
+    url: icmp://192.168.9.102
+    conditions: ["[CONNECTED] == true"]
+    alerts: [{ type: pushover }]
+  - name: talos-node-3
+    group: ICMP
+    url: icmp://192.168.9.103
+    conditions: ["[CONNECTED] == true"]
+    alerts: [{ type: pushover }]
+  - name: talos-node-4
+    group: ICMP
+    url: icmp://192.168.9.104
+    conditions: ["[CONNECTED] == true"]
+    alerts: [{ type: pushover }]
+  - name: cam-01-bedroom
+    group: ICMP
+    url: icmp://192.168.12.20
+    conditions: ["[CONNECTED] == true"]
+    alerts: [{ type: pushover }]

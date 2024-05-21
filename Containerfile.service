@@ -6,6 +6,11 @@ COPY .sops.yaml /usr/share/sops/
 COPY apps/blocky/blocky.container /usr/share/containers/systemd/
 COPY apps/blocky/config/config.yaml /usr/etc/blocky/
 
+# Apps - Gatus
+COPY apps/gatus/gatus.container /usr/share/containers/systemd/
+COPY apps/gatus/config.sops.env /usr/share/gatus/config.sops.env
+COPY apps/gatus/config /usr/etc/gatus/
+
 # Apps - Node-exporter
 COPY apps/node-exporter/node-exporter.container /usr/share/containers/systemd/
 
