@@ -33,7 +33,7 @@
         "path": "/etc/hostname",
         "contents": {
           "compression": "",
-          "source": "data:,service.feisar.ovh"
+          "source": "data:,storage-remote.feisar.ovh"
         },
         "mode": 420
       },
@@ -67,12 +67,12 @@
         "name": "getty@tty1.service"
       },
       {
-        "contents": "[Unit]\nDescription=uCore autorebase to OCI unsigned image and reboot\nConditionPathExists=!/etc/ucore/%N.stamp\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nType=oneshot\nStandardOutput=journal+console\nRemainAfterExit=yes\nExecStartPre=/usr/bin/echo \"Rebasing to uCore OCI unsigned image\"\nExecStartPre=/usr/bin/sleep 5\nExecStart=/usr/bin/rpm-ostree rebase ostree-unverified-registry:ghcr.io/auricom/ucore-minimal:service\nExecStartPost=/usr/bin/touch /etc/ucore/%N.stamp\nExecStartPost=/usr/bin/systemctl reboot\n\n[Install]\nWantedBy=multi-user.target",
+        "contents": "[Unit]\nDescription=uCore autorebase to OCI unsigned image and reboot\nConditionPathExists=!/etc/ucore/%N.stamp\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nType=oneshot\nStandardOutput=journal+console\nRemainAfterExit=yes\nExecStartPre=/usr/bin/echo \"Rebasing to uCore OCI unsigned image\"\nExecStartPre=/usr/bin/sleep 5\nExecStart=/usr/bin/rpm-ostree rebase ostree-unverified-registry:ghcr.io/auricom/ucore-minimal:storage-remote\nExecStartPost=/usr/bin/touch /etc/ucore/%N.stamp\nExecStartPost=/usr/bin/systemctl reboot\n\n[Install]\nWantedBy=multi-user.target",
         "enabled": true,
         "name": "ucore-autorebase.service"
       },
       {
-        "contents": "[Unit]\nDescription=uCore autorebase to OCI signed image and reboot\nConditionPathExists=!/etc/ucore/%N.stamp\nConditionPathExists=/etc/ucore/ucore-autorebase.stamp\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nType=oneshot\nStandardOutput=journal+console\nRemainAfterExit=yes\nExecStartPre=/usr/bin/echo \"Rebasing to uCore OCI signed image\"\nExecStartPre=/usr/bin/sleep 5\nExecStart=/usr/bin/rpm-ostree rebase ostree-image-signed:docker://ghcr.io/auricom/ucore-minimal:service\nExecStartPost=/usr/bin/touch /etc/ucore/%N.stamp\nExecStartPost=/usr/bin/systemctl reboot\n\n[Install]\nWantedBy=multi-user.target",
+        "contents": "[Unit]\nDescription=uCore autorebase to OCI signed image and reboot\nConditionPathExists=!/etc/ucore/%N.stamp\nConditionPathExists=/etc/ucore/ucore-autorebase.stamp\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nType=oneshot\nStandardOutput=journal+console\nRemainAfterExit=yes\nExecStartPre=/usr/bin/echo \"Rebasing to uCore OCI signed image\"\nExecStartPre=/usr/bin/sleep 5\nExecStart=/usr/bin/rpm-ostree rebase ostree-image-signed:docker://ghcr.io/auricom/ucore-minimal:storage-remote\nExecStartPost=/usr/bin/touch /etc/ucore/%N.stamp\nExecStartPost=/usr/bin/systemctl reboot\n\n[Install]\nWantedBy=multi-user.target",
         "enabled": true,
         "name": "ucore-autorebase-signed.service"
       }

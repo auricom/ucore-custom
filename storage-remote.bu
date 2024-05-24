@@ -23,7 +23,7 @@ storage:
     - path: /etc/hostname
       mode: 0644
       contents:
-        inline: service.feisar.ovh
+        inline: storage-remote.feisar.ovh
 
     # Turn off Stub Listener for systemd-resolved
     - path: /etc/systemd/resolved.conf.d/stub-listener.conf
@@ -53,8 +53,8 @@ systemd:
 
     # Ucore initial setup
     - name: ucore-autorebase.service
-      contents_local: systemd/ucore-autorebase.service.service
+      contents_local: systemd/ucore-autorebase.storage-remote.service
       enabled: true
     - name: ucore-autorebase-signed.service
-      contents_local: systemd/ucore-autorebase-signed.service.service
+      contents_local: systemd/ucore-autorebase-signed.storage-remote.service
       enabled: true

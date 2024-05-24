@@ -1,0 +1,17 @@
+[Unit]
+Description=Setup Firewalld Port Forwards
+ConditionFileIsExecutable=/usr/bin/firewall-cmd
+ConditionPathExists=!/etc/ucore/%N.stamp
+After=network-online.target firewalld.service
+
+[Service]
+Type=oneshot
+# Zrepl-exporter
+ExecStart=/usr/bin/firewall-cmd --add-port=9811/tcp --permanent
+# Node-exporter
+ExecStart=/usr/bin/firewall-cmd --add-port=9100/tcp --permanent
+ExecStart=/usr/bin/firewall-cmd --reload
+ExecStartPost=/usr/bin/touch /etc/ucore/%N.stamp
+
+[Install]
+WantedBy=multi-user.target

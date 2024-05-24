@@ -1,0 +1,31 @@
+FROM ghcr.io/ublue-os/ucore-minimal:stable-zfs
+
+COPY .sops.yaml /usr/share/sops/
+
+# Apps - Node-exporter
+COPY apps/node-exporter/node-exporter.container /usr/share/containers/systemd/
+
+# Apps - Scrutiny-collector
+COPY apps/scrutiny-collector/storage-remote.container /usr/share/containers/systemd/scrutiny-collector.container
+COPY apps/scrutiny-collector/storage-remote.sops.env /usr/share/scrutiny-collector/config.sops.env
+
+# Apps - Wireguard
+COPY apps/wireguard/wg0-client.sops.conf /usr/share/wireguard/wg0-client.sops.conf
+
+# Apps - Zrepl
+COPY apps/zrepl/storage-remote.yml /usr/etc/zrepl/zrepl.yml
+
+
+COPY systemd/ucore-update* /etc/systemd/system/
+COPY systemd/ucore-firewalld-setup-storage-remote.service /etc/systemd/system/
+COPY systemd/ucore-zfs-kernel.service /etc/systemd/system/
+COPY systemd/brew* /etc/systemd/system/
+COPY systemd/wg-client.service /etc/systemd/system/
+
+COPY scripts /tmp/
+
+RUN /tmp/install-common.sh && \
+    /tmp/install-storage-remote.sh && \
+    /tmp/post-install-common.sh && \
+    /tmp/post-install-storage-remote.sh && \
+    ostree container commit

@@ -32,7 +32,7 @@ jobs:
   }
   snapshotting:
     type: periodic
-    interval: 60m
+    interval: 720m
     prefix: zrepl_snap_14d_
     timestamp_format: dense
   pruning:
