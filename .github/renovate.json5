@@ -60,6 +60,14 @@
       "semanticCommitType": "feat"
     },
     {
+      "description": "Auto-merge container digests updates for trusted containers",
+      "matchDatasources": ["docker"],
+      "automerge": true,
+      "automergeType": "branch",
+      "matchUpdateTypes": ["digest"],
+      "matchPackagePatterns": ["cgr.dev/chainguard"]
+    },
+    {
       "addLabels": ["renovate/container", "type/patch"],
       "additionalBranchPrefix": "{{parentDir}}-",
       "commitMessageExtra": "( {{currentVersion}} → {{newVersion}} )",
