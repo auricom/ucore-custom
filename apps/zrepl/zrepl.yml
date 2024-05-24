@@ -24,7 +24,7 @@ jobs:
       - type: grid
         regex: ^zrepl_.*
         grid: 1x1h(keep=all) | 24x1h | 35x1d | 6x30d
-- name: snap_minio
+- name: snap_14d
   type: snap
   filesystems: {
     "vol1/apps/minio<": true,
@@ -38,5 +38,5 @@ jobs:
   pruning:
     keep:
       - type: grid
-        regex: ^zrepl_snap_minio_.*
+        regex: ^zrepl_snap_14d_.*
         grid: 1x1h(keep=all) | 24x1h | 17x1d
