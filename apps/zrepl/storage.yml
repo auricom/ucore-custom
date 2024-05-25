@@ -24,19 +24,19 @@ jobs:
       - type: grid
         regex: ^zrepl_.*
         grid: 1x1h(keep=all) | 24x1h | 35x1d | 6x30d
-- name: snap_14d
-  type: snap
-  filesystems: {
-    "vol1/apps/minio<": true,
-    "vol1/video<": true,
-  }
-  snapshotting:
-    type: periodic
-    interval: 720m
-    prefix: zrepl_snap_14d_
-    timestamp_format: dense
-  pruning:
-    keep:
-      - type: grid
-        regex: ^zrepl_snap_14d_.*
-        grid: 1x1h(keep=all) | 24x1h | 17x1d
+# - name: snap_14d
+#   type: snap
+#   filesystems: {
+#     "vol1/apps/minio<": true,
+#     "vol1/video<": true,
+#   }
+#   snapshotting:
+#     type: periodic
+#     interval: 720m
+#     prefix: zrepl_snap_14d_
+#     timestamp_format: dense
+#   pruning:
+#     keep:
+#       - type: grid
+#         regex: ^zrepl_snap_14d_.*
+#         grid: 1x1h(keep=all) | 24x1h | 17x1d
