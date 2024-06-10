@@ -2,6 +2,9 @@
 
 set -ouex pipefail
 
+# cockpit-ws
+systemctl enable cockpit.service
+
 # ZFS
 systemctl enable ucore-zfs-kernel.service
 systemctl enable zrepl.service

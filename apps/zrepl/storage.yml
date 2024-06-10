@@ -27,7 +27,7 @@ jobs:
 # - name: snap_14d
 #   type: snap
 #   filesystems: {
-#     "vol1/apps/minio<": true,
+#     "vol2/apps/minio<": true,
 #     "vol1/video<": true,
 #   }
 #   snapshotting:
