@@ -20,6 +20,7 @@ ExecStart=/usr/bin/firewall-cmd --reload
 # SELinux
 ExecStart=restorecon -R /mnt/vol1
 ExecStart=semanage fcontext --add --type "public_content_rw_t" "/mnt/vol1(/.*)?"
+ExecStart=setsebool -P samba_export_all_rw 1
 ExecStartPost=/usr/bin/touch /etc/ucore/%N.stamp
 
 [Install]
