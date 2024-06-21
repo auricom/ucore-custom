@@ -3,7 +3,7 @@
 set -ouex pipefail
 
 # Wireguard
-systemctl enable wg-client.service
+systemctl enable wg0-client.service
 
 # ZFS
 systemctl enable ucore-zfs-kernel.service

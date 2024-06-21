@@ -20,7 +20,7 @@ COPY systemd/ucore-update* /etc/systemd/system/
 COPY systemd/ucore-firewalld-setup-storage-remote.service /etc/systemd/system/
 COPY systemd/ucore-zfs-kernel.service /etc/systemd/system/
 COPY systemd/brew* /etc/systemd/system/
-COPY systemd/wg-client.service /etc/systemd/system/
+COPY systemd/wg0-client.service /etc/systemd/system/
 
 COPY scripts /tmp/
 
