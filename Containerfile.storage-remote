@@ -11,16 +11,17 @@ COPY apps/scrutiny-collector/storage-remote.sops.env /usr/share/scrutiny-collect
 
 # Apps - Wireguard
 COPY apps/wireguard/wg0-client.sops.conf /usr/share/wireguard/wg0-client.sops.conf
+COPY systemd/wg0-client.service /etc/systemd/system/
 
 # Apps - Zrepl
-COPY apps/zrepl/storage-remote.yml /usr/etc/zrepl/zrepl.yml
+COPY apps/zrepl /tmp/apps/zrepl
+COPY systemd/zrepl-secrets.service /etc/systemd/system/
 
 
 COPY systemd/ucore-update* /etc/systemd/system/
 COPY systemd/ucore-firewalld-setup-storage-remote.service /etc/systemd/system/
 COPY systemd/ucore-zfs-kernel.service /etc/systemd/system/
 COPY systemd/brew* /etc/systemd/system/
-COPY systemd/wg0-client.service /etc/systemd/system/
 
 COPY scripts /tmp/
 

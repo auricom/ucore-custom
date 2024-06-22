@@ -8,6 +8,8 @@ After=network-online.target firewalld.service
 Type=oneshot
 # Zrepl-exporter
 ExecStart=/usr/bin/firewall-cmd --add-port=9811/tcp --permanent
+# Zrep server
+ExecStart=/usr/bin/firewall-cmd --add-port=8888/tcp --permanent
 # Node-exporter
 ExecStart=/usr/bin/firewall-cmd --add-port=9100/tcp --permanent
 ExecStart=/usr/bin/firewall-cmd --reload

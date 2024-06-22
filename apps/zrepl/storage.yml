@@ -7,36 +7,31 @@ global:
     - type: prometheus
       listen: :9811
 jobs:
-- name: snap_default
-  type: snap
+- name: push_default
+  type: push
+  connect:
+    type: tls
+    address: storage-remote.feisar.ovh:8888
+    ca: /etc/zrepl/storage-remote.crt
+    cert: /etc/zrepl/storage.crt
+    key:  /etc/zrepl/storage.key
+    server_cn: storage-remote
   filesystems: {
     "vol1<": true,
-    "vol1/apps/minio<": false,
     "vol1/video<": false,
+    "vol2<": true,
   }
   snapshotting:
     type: periodic
     interval: 720m
-    prefix: zrepl_snap_default_
+    prefix: zrepl_push_default_
     timestamp_format: dense
   pruning:
-    keep:
+    keep_sender:
+    - type: not_replicated
+    - type: last_n
+      count: 10
+    keep_receiver:
       - type: grid
         regex: ^zrepl_.*
         grid: 1x1h(keep=all) | 24x1h | 35x1d | 6x30d
-# - name: snap_14d
-#   type: snap
-#   filesystems: {
-#     "vol2/apps/minio<": true,
-#     "vol1/video<": true,
-#   }
-#   snapshotting:
-#     type: periodic
-#     interval: 720m
-#     prefix: zrepl_snap_14d_
-#     timestamp_format: dense
-#   pruning:
-#     keep:
-#       - type: grid
-#         regex: ^zrepl_snap_14d_.*
-#         grid: 1x1h(keep=all) | 24x1h | 17x1d

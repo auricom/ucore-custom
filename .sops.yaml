@@ -5,7 +5,7 @@ creation_rules:
     key_groups:
       - age:
           - age1c8cqpw6gnlrf82ewm2vj0yalzszvtzd0mmk5yzr4nfpqqseynq7q86f3sq
-  - path_regex: \.sops\.conf$
+  - path_regex: \.sops\.(conf|crt|key)$
     key_groups:
       - age:
           - age1c8cqpw6gnlrf82ewm2vj0yalzszvtzd0mmk5yzr4nfpqqseynq7q86f3sq

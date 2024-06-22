@@ -5,6 +5,7 @@ set -ouex pipefail
 # ZFS
 systemctl enable ucore-zfs-kernel.service
 systemctl enable zrepl.service
+systemctl enable zrepl-secrets.service
 
 # NFS
 systemctl enable nfs-server.service

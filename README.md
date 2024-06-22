@@ -40,3 +40,11 @@ sudo passwd core
 ```
 
 3. Deploy [dotfiles](https://github.com/auricom/dotfiles/tree/main)
+
+```bash
+set -U fish_user_paths /home/linuxbrew/.linuxbrew/bin/ $fish_user_paths
+brew install chezmoi
+mkdir -p /home/core/.config/sops/age
+nano /home/core/.config/sops/age/chezmoi.txt
+chezmoi init --apply auricom
+```

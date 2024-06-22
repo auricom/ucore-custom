@@ -7,4 +7,4 @@ rpm-ostree install \
     samba
 
 /tmp/apps/cockpit-ws-zfs.sh
-/tmp/apps/zrepl.sh
+/tmp/apps/zrepl.sh storage storage-remote

@@ -43,8 +43,8 @@ COPY apps/traefik/config.sops.env /usr/share/traefik/config.sops.env
 COPY apps/traefik/config/storage.yaml /usr/etc/traefik/traefik.yaml
 
 # Apps - Zrepl
-COPY apps/zrepl/storage.yml /usr/etc/zrepl/zrepl.yml
-
+COPY apps/zrepl /tmp/apps/zrepl
+COPY systemd/zrepl-secrets.service /etc/systemd/system/
 
 COPY systemd/ucore-update* /etc/systemd/system/
 COPY systemd/ucore-firewalld-setup-storage.service /etc/systemd/system/
