@@ -27,8 +27,8 @@ Volume=/dev/sda:/dev/sda:ro,rslave
 Volume=/dev/sdb:/dev/sdb:ro,rslave
 Volume=/dev/sdc:/dev/sdc:ro,rslave
 Volume=/dev/sdd:/dev/sdd:ro,rslave
-Volume=/dev/sde:/dev/sdd:ro,rslave
-Volume=/dev/sdf:/dev/sdd:ro,rslave
+Volume=/dev/sde:/dev/sde:ro,rslave
+Volume=/dev/sdf:/dev/sdf:ro,rslave
 SecurityLabelType=container_runtime_t
 
 [Install]

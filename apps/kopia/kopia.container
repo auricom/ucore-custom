@@ -17,7 +17,7 @@ Exec=server start --insecure --address 0.0.0.0:8080 --override-hostname storage.
 Volume=/usr/etc/resilio-sync/claude.conf:/app/sync.conf:ro
 Volume=kopia-cache:/app/cache
 Volume=kopia-logs:/app/logs
-Volume=/var/mnt/vol1/apps/minio/kopia:/var/mnt/vol1/apps/minio/kopia
+Volume=/var/mnt/vol2/apps/minio/kopia:/var/mnt/vol2/apps/minio/kopia
 SecurityLabelType=container_runtime_t
 Label=traefik.enable="true"
 Label=traefik.http.routers.kopia.rule=Host'(`kopia.feisar.ovh`)'
