@@ -2,9 +2,6 @@
 
 set -ouex pipefail
 
-# cockpit-ws
-systemctl enable cockpit.service
-
 # Wireguard
 systemctl enable wg0-client.service
 

@@ -21,14 +21,20 @@ rpm-ostree install \
 rpm-ostree install "https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION#v}.x86_64.rpm"
 
 
+#
 # Brew
+#
+
+# https://github.com/ublue-os/bluefin/blob/c804b2deb730d5d846717957b5780a7c56825fe3/build_files/base/brew.sh
+
+# Convince the installer we are in CI
 touch /.dockerenv
+
+# Make these so script will work
 mkdir -p /var/home
 mkdir -p /var/roothome
 
 curl -Lo /tmp/brew-install https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 chmod +x /tmp/brew-install
 /tmp/brew-install
-rm -rf /home/linuxbrew/.linuxbrew/Homebrew/Library/Homebrew/vendor
-rm -rf /home/linuxbrew/.linuxbrew/Homebrew/.git
-cp -R /home/linuxbrew /usr/share/homebrew
+tar --zstd -cvf /usr/share/homebrew.tar.zst /home/linuxbrew/.linuxbrew
