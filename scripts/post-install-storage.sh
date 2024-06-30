@@ -11,7 +11,7 @@ systemctl enable zrepl-secrets.service
 systemctl enable nfs-server.service
 
 # Samba
-systemctl enable smb.service
+# systemctl enable smb.service
 
 # firwall rules
 systemctl enable ucore-firewalld-setup-storage.service
