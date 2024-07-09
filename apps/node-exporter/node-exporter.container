@@ -11,7 +11,7 @@ RestartSec=3
 [Container]
 AutoUpdate=registry
 ContainerName=node-exporter
-Image=cgr.dev/chainguard/prometheus-node-exporter:latest@sha256:74f2ccab69ebca55e3f9e37a906cf5b047316989700e84df48cbe77950f58a9f
+Image=cgr.dev/chainguard/prometheus-node-exporter:latest@sha256:eb7426c96f5a1317f1b331a0a6edcd5abeb519ab79222b376416c21b5582abae
 Exec=--path.rootfs=/host
 PodmanArgs=--pid=host
 Volume=/:/host:ro,rslave
