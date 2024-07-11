@@ -23,7 +23,7 @@ jobs:
       matrix: ${{ steps.discover-containerfiles.outputs.matrix }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
       - name: Discover Containerfiles
         id: discover-containerfiles
@@ -61,10 +61,10 @@ jobs:
       matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
       - name: Maximize disk space
-        uses: ublue-os/remove-unwanted-software@v7
+        uses: ublue-os/remove-unwanted-software@517622d6452028f266b7ba4cc9a123b5f58a6b53 # v7
 
       - name: Matrix Variables
         shell: bash
@@ -79,7 +79,7 @@ jobs:
           echo "FULL_IMAGE=$FULL_IMAGE" >> $GITHUB_ENV
 
       - name: Verify base image
-        uses: EyeCantCU/cosign-action/verify@v0.3.0
+        uses: EyeCantCU/cosign-action/verify@58722a084c82190b57863002d494c91eabbe9e79 # v0.3.0
         with:
           containers: ${{ env.FROM_IMAGE }}:${{ env.FROM_IMAGE_TAG }}
 
@@ -132,7 +132,7 @@ jobs:
 
       # Build metadata
       - name: Image Metadata
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5
         id: meta
         with:
           images: |
@@ -146,7 +146,7 @@ jobs:
       # Build image using Buildah action
       - name: Build Image
         id: build_image
-        uses: redhat-actions/buildah-build@v2
+        uses: redhat-actions/buildah-build@7a95fa7ee0f02d552a32753e7414641a04307056 # v2
         with:
           containerfiles: |
             ./${{ env.CONTAINERFILE }}
@@ -162,13 +162,13 @@ jobs:
       # https://github.com/macbre/push-to-ghcr/issues/12
       - name: Lowercase Registry
         id: registry_case
-        uses: ASzc/change-string-case-action@v6
+        uses: ASzc/change-string-case-action@d0603cd0a7dd490be678164909f65c7737470a7f # v6
         with:
           string: ${{ env.IMAGE_REGISTRY }}
 
       # Push the image to GHCR (Image Registry)
       - name: Push To GHCR
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@5ed88d269cf581ea9ef6dd6806d01562096bee9c # v2
         id: push
         env:
           REGISTRY_USER: ${{ github.actor }}
@@ -181,14 +181,14 @@ jobs:
           password: ${{ env.REGISTRY_PASSWORD }}
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446 # v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # Sign container
-      - uses: sigstore/cosign-installer@v3.5.0
+      - uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20 # v3.5.0
         if: github.event_name != 'pull_request'
 
       - name: Sign container image with keypair
