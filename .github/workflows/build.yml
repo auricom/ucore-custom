@@ -79,7 +79,7 @@ jobs:
           echo "FULL_IMAGE=$FULL_IMAGE" >> $GITHUB_ENV
 
       - name: Verify base image
-        uses: EyeCantCU/cosign-action/verify@v0.2.2
+        uses: EyeCantCU/cosign-action/verify@v0.3.0
         with:
           containers: ${{ env.FROM_IMAGE }}:${{ env.FROM_IMAGE_TAG }}
 
