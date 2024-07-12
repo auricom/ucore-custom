@@ -39,7 +39,7 @@ jobs:
             fi
             full_image=$(grep '^FROM ' Containerfile.$file | awk '{print $2}')
             from_image=$(echo $full_image | awk -F/ '{print $NF}' | awk -F: '{print $1}')
-            from_image_tag=$(echo $full_image | awk -F: '{print $2}')
+            from_image_tag=$(echo $full_image | awk -F: '{print $2}' | awk -F@ '{print $1}')
             matrix+="{\"name\":\"$file\", \"from_image\":\"$from_image\", \"from_image_tag\":\"$from_image_tag\", \"full_image\":\"$full_image\"}"
           done
           matrix+="]}"
