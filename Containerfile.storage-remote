@@ -1,5 +1,7 @@
 FROM ghcr.io/ublue-os/ucore-minimal:stable-zfs@sha256:3cd4d4ce41bc427f4489ab8787fcae84776c0db9febf95799cfe13a3bb7ee139
 
+ARG HOST
+
 COPY .sops.yaml /usr/share/sops/
 
 # Apps - Node-exporter
@@ -19,14 +21,12 @@ COPY systemd/zrepl-secrets.service /etc/systemd/system/
 
 
 COPY systemd/ucore-update* /etc/systemd/system/
-COPY systemd/ucore-firewalld-setup-storage-remote.service /etc/systemd/system/
+COPY systemd/ucore-firewalld-setup-storage-remote.service /etc/systemd/system/ucore-firewalld-setup.service
 COPY systemd/ucore-zfs-kernel.service /etc/systemd/system/
 COPY systemd/brew* /etc/systemd/system/
 
 COPY scripts /tmp/
 
-RUN /tmp/install-common.sh && \
-    /tmp/install-storage-remote.sh && \
-    /tmp/post-install-common.sh && \
-    /tmp/post-install-storage-remote.sh && \
+RUN /tmp/install.sh && \
+    /tmp/post-install.sh && \
     ostree container commit
