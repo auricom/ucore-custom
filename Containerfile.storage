@@ -1,4 +1,4 @@
-FROM ghcr.io/ublue-os/ucore-minimal:stable-zfs@sha256:b5ba3c30280538b7d48bbb2e6e8d4794f0c1488166ffcc2416f7cf0d4bfb225f
+FROM ghcr.io/ublue-os/ucore-minimal:stable-zfs@sha256:3cd4d4ce41bc427f4489ab8787fcae84776c0db9febf95799cfe13a3bb7ee139
 
 COPY .sops.yaml /usr/share/sops/
 
