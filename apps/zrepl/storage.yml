@@ -18,6 +18,7 @@ jobs:
     server_cn: storage-remote
   filesystems: {
     "vol1<": true,
+    "vol1/apps/frigate<": false,
     "vol1/video<": false,
     "vol2<": true,
   }
