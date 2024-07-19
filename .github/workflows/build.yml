@@ -1,12 +1,14 @@
 name: build-ucore-custom
 on:
-  schedule:
-    - cron: 15 1 * * *  # approx 1.5 hours after ublue-os/ucore images publish
   push:
     branches:
       - main
     paths-ignore:
+      - .github
+      - .gitignore
+      - .trunk
       - '**/README.md'
+      - LICENSE
   workflow_dispatch:
 
 env:

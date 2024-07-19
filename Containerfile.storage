@@ -31,10 +31,6 @@ COPY apps/resilio-sync/resilio-sync-helene.volume /usr/share/containers/systemd/
 COPY apps/resilio-sync/config/claude.conf /usr/etc/resilio-sync/claude.conf
 COPY apps/resilio-sync/config/helene.conf /usr/etc/resilio-sync/helene.conf
 
-# Apps - Samba
-COPY apps/samba/smb.conf /usr/etc/samba/smb.conf
-COPY apps/samba/shares/photo /var/lib/samba/usershares/photo
-
 # Apps - Scrutiny-collector
 COPY apps/scrutiny-collector/storage.container /usr/share/containers/systemd/scrutiny-collector.container
 COPY apps/scrutiny-collector/storage.sops.env /usr/share/scrutiny-collector/config.sops.env

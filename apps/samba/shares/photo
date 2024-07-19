@@ -1,5 +1,0 @@
-[photo]
-path=/var/mnt/vol1/photo
-comment=photo
-usershare_acl=STORAGE\core:F,
-guest_ok=n
