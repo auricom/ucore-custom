@@ -1,14 +1,7 @@
 name: build-ucore-custom
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - .github/**
-      - .gitignore
-      - .trunk/**
-      - '**/README.md'
-      - LICENSE
+  schedule:
+    - cron: 0 4 * * 6  # Once a week on Saturday morning
   workflow_dispatch:
 
 env:
