@@ -19,7 +19,17 @@ Environment=FB_ADDRESS=0.0.0.0
 Environment=FB_PORT=7000
 Image=ghcr.io/auricom/filebrowser:2.30.0@sha256:152be83a08fe463a8fca1b2a0bfed7fa082de099f5e04c99851ba946d7109ee3
 Volume=filebrowser.volume:/config
-Volume=/var/mnt/vol1:/var/mnt/vol1:bind
+Volume=/var/mnt/vol1/apps/frigate:/var/mnt/vol1/apps/frigate:bind
+Volume=/var/mnt/vol1/backups:/var/mnt/vol1/backups:bind
+Volume=/var/mnt/vol1/downloads:/var/mnt/vol1/downloads:bind
+Volume=/var/mnt/vol1/home/claude:/var/mnt/vol1/home/claude:bind
+Volume=/var/mnt/vol1/home/helene:/var/mnt/vol1/home/helene:bind
+Volume=/var/mnt/vol1/music:/var/mnt/vol1/music:bind
+Volume=/var/mnt/vol1/music_transcoded:/var/mnt/vol1/music_transcoded:bind
+Volume=/var/mnt/vol1/piracy:/var/mnt/vol1/piracy:bind
+Volume=/var/mnt/vol1/shared-documents:/var/mnt/vol1/shared-documents:bind
+Volume=/var/mnt/vol1/video:/var/mnt/vol1/video:bind
+Volume=/var/mnt/vol2/apps/minio:/var/mnt/vol2/apps/minio:bind
 SecurityLabelType=container_runtime_t
 # Traefik
 Label=traefik.enable="true"
