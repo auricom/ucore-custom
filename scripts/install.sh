@@ -23,7 +23,7 @@ rpm-ostree install \
 if [[ "${HOST}" = "storage" ]]; then
 
     rpm-ostree install \
-        nfs-utils \
+        nfs-utils-coreos \
         samba
 
     /tmp/apps/zrepl.sh storage storage-remote
