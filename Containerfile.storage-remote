@@ -11,6 +11,10 @@ COPY apps/node-exporter/node-exporter.container /usr/share/containers/systemd/
 COPY apps/scrutiny-collector/storage-remote.container /usr/share/containers/systemd/scrutiny-collector.container
 COPY apps/scrutiny-collector/storage-remote.sops.env /usr/share/scrutiny-collector/config.sops.env
 
+# Apps - Ucore
+COPY apps/ucore/lib/common_utils.sops.sh /usr/share/ucore/common_utils.sops.sh
+COPY apps/ucore/ucore-update.sh /usr/sbin/ucore-update.sh
+
 # Apps - Wireguard
 COPY apps/wireguard/wg0-client.sops.conf /usr/share/wireguard/wg0-client.sops.conf
 COPY systemd/wg0-client.service /etc/systemd/system/

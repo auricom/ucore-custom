@@ -41,6 +41,10 @@ COPY apps/traefik/traefik.volume /usr/share/containers/systemd/
 COPY apps/traefik/config.sops.env /usr/share/traefik/config.sops.env
 COPY apps/traefik/config/storage.yaml /usr/etc/traefik/traefik.yaml
 
+# Apps - Ucore
+COPY apps/ucore/lib/common_utils.sops.sh /usr/share/ucore/common_utils.sops.sh
+COPY apps/ucore/ucore-update.sh /usr/sbin/ucore-update.sh
+
 # Apps - Zrepl
 COPY apps/zrepl /tmp/apps/zrepl
 COPY systemd/zrepl-secrets.service /etc/systemd/system/
