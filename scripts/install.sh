@@ -21,6 +21,8 @@ rpm-ostree install \
 
 
 if [[ "${HOST}" = "storage" ]]; then
+    rpm-ostree uninstall \
+        nfs-utils-coreos
 
     rpm-ostree install \
         nfs-utils \
