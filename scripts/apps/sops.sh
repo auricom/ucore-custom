@@ -5,21 +5,13 @@ set -ouex pipefail
 
 # renovate: datasource=github-releases depName=getsops/sops
 SOPS_VERSION=v3.9.0
+RELEASE_URL="https://api.github.com/repos/getsops/sops/releases/tags/${SOPS_VERSION}"
 
-get_rpm_url() {
-    local version=$1
-    local api_url="https://api.github.com/repos/getsops/sops/releases/tags/${version}"
+RPM_URL=$(curl -s "${RELEASE_URL}" | grep -oP '(?<="browser_download_url": ")[^"]*\.x86_64\.rpm')
 
-    rpm_url=$(curl -s "$api_url" | jq -r '.assets[] | select(.name | endswith(".x86_64.rpm")) | .browser_download_url')
-
-    echo "$rpm_url"
-}
-
-RPM_URL=$(get_rpm_url "$SOPS_VERSION")
-
-if [ -z "$RPM_URL" ]; then
-    echo "No RPM found for SOPS version $SOPS_VERSION"
+if [[ -z "${RPM_URL}" ]]; then
+    echo "No RPM found for SOPS version ${SOPS_VERSION}"
     exit 1
 fi
 
-rpm-ostree install "$RPM_URL"
+rpm-ostree install "${RPM_URL}"
