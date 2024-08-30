@@ -4,7 +4,7 @@ set -ouex pipefail
 
 
 # renovate: datasource=github-releases depName=getsops/sops
-SOPS_VERSION=v3.8.1
+SOPS_VERSION=v3.9.0
 
 get_rpm_url() {
     local version=$1
