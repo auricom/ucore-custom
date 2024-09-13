@@ -26,6 +26,7 @@ if [[ "${HOST}" = "storage" ]]; then
 
     rpm-ostree install \
         nfs-utils \
+        nut \
         samba
 
     /tmp/apps/zrepl.sh storage storage-remote
