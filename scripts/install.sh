@@ -13,7 +13,8 @@ rpm-ostree install \
     cockpit-podman \
     distrobox \
     fish \
-    fzf
+    fzf \
+    usbutils
 
 /tmp/apps/brew.sh
 /tmp/apps/cockpit-ws-zfs.sh
