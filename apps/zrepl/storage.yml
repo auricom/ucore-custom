@@ -31,12 +31,12 @@ jobs:
     keep_sender:
     - type: not_replicated
     - type: last_n
-      count: 10
+      count: 14
     keep_receiver:
       - type: grid
         regex: ^zrepl_.*
         grid: 1x1h(keep=all) | 24x1h | 35x1d | 6x30d
-- name: snap_14d
+- name: local_video
   type: snap
   filesystems: {
     "vol1/video<": true,
@@ -44,10 +44,10 @@ jobs:
   snapshotting:
     type: periodic
     interval: 720m
-    prefix: zrepl_snap_14d_
+    prefix: zrepl_video_
     timestamp_format: dense
   pruning:
     keep:
-      - type: grid
-        regex: ^zrepl_snap_14d_.*
-        grid: 1x1h(keep=all) | 24x1h | 17x1d
+      - type: last_n
+        regex: ^zrepl_video_.*
+        count: 10
