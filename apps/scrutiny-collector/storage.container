@@ -16,7 +16,7 @@ ExecStartPre=/usr/bin/sops --config /usr/share/sops/.sops.yaml exec-file /usr/sh
 AutoUpdate=registry
 ContainerName=scrutiny-collector
 EnvironmentFile=/etc/scrutiny-collector/config.env
-Image=ghcr.io/analogj/scrutiny:master-collector@sha256:b1e4063a0186331714b6e8fa545ec88883c313e1ae9df35b600cbf689c73fe8e
+Image=ghcr.io/analogj/scrutiny:master-collector@sha256:078ee621e56fd5015a9b7ac5f521f881a818e342d190f5e5e7da5adf7f9f2798
 PodmanArgs=--privileged
 PodmanArgs=--cap-add=SYS_ADMIN
 PodmanArgs=--cap-add=SYS_RAWIO
