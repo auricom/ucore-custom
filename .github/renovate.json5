@@ -4,7 +4,7 @@
             "customType": "regex",
             "fileMatch": ["^.*\\.container$"],
             "matchStrings": [
-                "Image=(?<depName>[\\w./-]+):(?<currentValue>[^@]+)@(?<digest>sha256:[a-fA-F0-9]{64})"
+                "Image=\"?(?<depName>[^\\s:@\"]+)(?::(?<currentValue>[-a-zA-Z0-9.]+))?(?:@(?<currentDigest>sha256:[a-zA-Z0-9]+))?\"?"
             ],
             "datasourceTemplate": "docker",
             "versioningTemplate": "docker"
