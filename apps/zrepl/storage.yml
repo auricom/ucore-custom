@@ -31,7 +31,7 @@ jobs:
     keep_sender:
     - type: not_replicated
     - type: last_n
-      count: 14
+      count: 28 # 14 days
     keep_receiver:
       - type: grid
         regex: ^zrepl_.*
@@ -50,4 +50,4 @@ jobs:
     keep:
       - type: last_n
         regex: ^zrepl_video_.*
-        count: 10
+        count: 20 # 10 days
