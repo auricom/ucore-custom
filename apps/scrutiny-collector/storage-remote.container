@@ -25,6 +25,7 @@ Volume=/dev/nvme0:/dev/nvme0:ro,rslave
 Volume=/dev/sda:/dev/sda:ro,rslave
 Volume=/dev/sdb:/dev/sdb:ro,rslave
 SecurityLabelType=container_runtime_t
+Network=host
 
 [Install]
 WantedBy=default.target
