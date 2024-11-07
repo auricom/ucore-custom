@@ -27,6 +27,7 @@ Volume=/var/mnt/vol1/home/helene:/var/mnt/vol1/home/helene:bind
 Volume=/var/mnt/vol1/music:/var/mnt/vol1/music:bind
 Volume=/var/mnt/vol1/music_transcoded:/var/mnt/vol1/music_transcoded:bind
 Volume=/var/mnt/vol1/piracy:/var/mnt/vol1/piracy:bind
+Volume=/var/mnt/vol1/photo:/var/mnt/vol1/photo:bind
 Volume=/var/mnt/vol1/shared-documents:/var/mnt/vol1/shared-documents:bind
 Volume=/var/mnt/vol1/video:/var/mnt/vol1/video:bind
 Volume=/var/mnt/vol2/apps/minio:/var/mnt/vol2/apps/minio:bind
