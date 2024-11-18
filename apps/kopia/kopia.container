@@ -12,7 +12,7 @@ RestartSec=3
 AutoUpdate=registry
 ContainerName=kopia
 Environment=TZ=Europe/Paris
-Image=docker.io/kopia/kopia:0.18.0@sha256:d0c30fba4ed8688cfa580d6182cc1bdc2c3c5e60c65e42fb21bd1dc51cc7a0e3
+Image=docker.io/kopia/kopia:0.18.1@sha256:8f9cd30c19f4683397262ff89d62ee0446fe67c952c8e106388717fdd0e922b0
 Exec=server start --insecure --address 0.0.0.0:8080 --override-hostname storage.feisar.ovh --override-username claude --without-password --metrics-listen-addr 0.0.0.0:8090
 Volume=kopia-cache:/app/cache
 Volume=kopia-logs:/app/logs
