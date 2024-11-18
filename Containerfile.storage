@@ -17,6 +17,9 @@ COPY apps/kopia/kopia-logs.volume /usr/share/containers/systemd/
 COPY apps/minio/minio.container /usr/share/containers/systemd/
 COPY apps/minio/config.sops.env /usr/share/minio/config.sops.env
 
+# Apps - NFS-server
+COPY apps/nfs-server/nas-shares.exports /usr/etc/exports/nas-shares.exports
+
 # Apps - Node-exporter
 COPY apps/node-exporter/node-exporter.container /usr/share/containers/systemd/
 

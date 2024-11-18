@@ -17,7 +17,7 @@ rpm-ostree install \
     usbutils
 
 /tmp/apps/brew.sh
-/tmp/apps/cockpit-ws-zfs.sh
+/tmp/apps/cockpit-zfs.sh
 /tmp/apps/sops.sh
 
 
@@ -30,6 +30,7 @@ if [[ "${HOST}" = "storage" ]]; then
         nut \
         samba
 
+    /tmp/apps/cockpit-file-sharing.sh
     /tmp/apps/zrepl.sh storage storage-remote
 
 elif [[ "${HOST}" = "storage-remote" ]]; then
