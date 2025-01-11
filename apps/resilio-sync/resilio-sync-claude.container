@@ -11,7 +11,7 @@ RestartSec=3
 [Container]
 AutoUpdate=registry
 ContainerName=resilio-sync-claude
-Image=ghcr.io/auricom/resilio-sync:3.0.0@sha256:e75d4febb889b2207cafd65318fa902a7875370dcf6f60a00f31e111a95b3e47
+Image=ghcr.io/auricom/resilio-sync:3.0.0@sha256:6283bb9bc32d5c109da8e658828c930d76114db5cf6e1f152e49e07174feb4c1
 Volume=/usr/etc/resilio-sync/claude.conf:/app/sync.conf:ro
 Volume=resilio-sync-claude:/config:rslave
 Volume=/var/mnt/vol1/backups:/sync/backups:rslave
