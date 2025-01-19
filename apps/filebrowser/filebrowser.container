@@ -13,24 +13,13 @@ AutoUpdate=registry
 ContainerName=filebrowser
 Environment=TZ=Europe/Paris
 Environment=FB_DATABASE=/config/filebrowser.db
-Environment=FB_ROOT=/var/mnt/vol1/
+Environment=FB_ROOT=/var/mnt/
 Environment=FB_LOG=stdout
 Environment=FB_ADDRESS=0.0.0.0
 Environment=FB_PORT=7000
 Image=ghcr.io/auricom/filebrowser:2.31.2@sha256:9e6bb9f12f61da90ef8fad790300bfaa9e00713651301554902dad715333731c
 Volume=filebrowser.volume:/config
-Volume=/var/mnt/vol1/apps/frigate:/var/mnt/vol1/apps/frigate:bind
-Volume=/var/mnt/vol1/backups:/var/mnt/vol1/backups:bind
-Volume=/var/mnt/vol1/downloads:/var/mnt/vol1/downloads:bind
-Volume=/var/mnt/vol1/home/claude:/var/mnt/vol1/home/claude:bind
-Volume=/var/mnt/vol1/home/helene:/var/mnt/vol1/home/helene:bind
-Volume=/var/mnt/vol1/music:/var/mnt/vol1/music:bind
-Volume=/var/mnt/vol1/music_transcoded:/var/mnt/vol1/music_transcoded:bind
-Volume=/var/mnt/vol1/piracy:/var/mnt/vol1/piracy:bind
-Volume=/var/mnt/vol1/photo:/var/mnt/vol1/photo:bind
-Volume=/var/mnt/vol1/shared-documents:/var/mnt/vol1/shared-documents:bind
-Volume=/var/mnt/vol1/video:/var/mnt/vol1/video:bind
-Volume=/var/mnt/vol2/apps/minio:/var/mnt/vol2/apps/minio:bind
+Volume=/var/mnt/:/var/mnt/:bind
 SecurityLabelType=container_runtime_t
 # Traefik
 Label=traefik.enable="true"
