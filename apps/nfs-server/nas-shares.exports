@@ -1,6 +1,5 @@
 /mnt/vol1/apps/frigate 192.168.8.0/22(rw,sync,all_squash,anonuid=1000,anongid=1000,no_subtree_check,sec=sys)
 /mnt/vol1/apps/sharry 192.168.8.0/22(rw,sync,all_squash,anonuid=1000,anongid=1000,no_subtree_check,sec=sys)
-/mnt/vol1/backups 192.168.8.0/22(rw,sync,all_squash,anonuid=1000,anongid=1000,no_subtree_check,sec=sys)
 /mnt/vol1/downloads 192.168.8.0/22(rw,sync,all_squash,anonuid=1000,anongid=1000,no_subtree_check,sec=sys)
 /mnt/vol1/home/helene 192.168.8.0/22(rw,sync,all_squash,anonuid=1000,anongid=1000,no_subtree_check,sec=sys)
 /mnt/vol1/home/claude 192.168.8.0/22(rw,sync,all_squash,anonuid=1000,anongid=1000,no_subtree_check,sec=sys)

@@ -13,4 +13,4 @@ curl -L -o "/tmp/resticprofile.tar.gz" "${ASSET_URL}"
 
 tar -xzf /tmp/resticprofile.tar.gz -C /tmp
 
-mv "/tmp/resticprofile" /usr/local/bin
+mv /tmp/resticprofile /usr/bin
