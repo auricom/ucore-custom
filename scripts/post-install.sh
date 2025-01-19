@@ -27,6 +27,10 @@ systemctl enable ucore-firewalld-setup.service
 
 if [[ "${HOST}" = "storage" ]]; then
 
+    # Resticprofile
+    systemctl enable resticprofile-backup.timer
+    systemctl enable resticprofile-forget.timer
+
     # NFS
     systemctl enable nfs-server.service
 

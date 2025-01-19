@@ -31,6 +31,7 @@ if [[ "${HOST}" = "storage" ]]; then
         samba
 
     /tmp/apps/cockpit-file-sharing.sh
+    /tmp/apps/resticprofile.sh
     /tmp/apps/zrepl.sh storage storage-remote
 
 elif [[ "${HOST}" = "storage-remote" ]]; then

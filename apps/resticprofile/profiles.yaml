@@ -1,0 +1,107 @@
+# yaml-language-server: $schema=https://creativeprojects.github.io/resticprofile/jsonschema/config.json
+version: "2"
+
+profiles:
+  default:
+    env:
+      tmp: /tmp
+    cleanup-cache: true
+    exclude-caches: true
+    initialize: true
+    password-file: key
+    restic-stale-lock-age: 2h
+    extended-status: true
+    no-error-on-warning: true
+    prometheus-push: https://pushgateway.xpander.ovh/
+    cache:
+      cleanup: true
+      max-age: 7
+    find:
+      human-readable: true
+      long: true
+    forget:
+      keep-daily: 10
+      keep-weekly: 6
+      keep-monthly: 6
+      keep-yearly: 0
+      prune: true
+    ls:
+      human-readable: true
+      long: true
+      recursive: true
+
+  home:
+    inherit: default
+    lock: /tmp/resticprofile-profile-home.lock
+    prometheus-save-to-file: /usr/share/resticprofile/home.prom
+    backup:
+      source: /var/mnt/vol1/home
+    repository: rclone:storage-backup:home
+    snapshots:
+      tag:
+        - home
+
+  music:
+    inherit: default
+    lock: /tmp/resticprofile-profile-music.lock
+    prometheus-save-to-file: /usr/share/resticprofile/music.prom
+    backup:
+      source: /var/mnt/vol1/music
+    repository: rclone:storage-backup:music
+    snapshots:
+      tag:
+        - music
+
+  photo:
+    inherit: default
+    lock: /tmp/resticprofile-profile-photo.lock
+    prometheus-save-to-file: /usr/share/resticprofile/photo.prom
+    backup:
+      source: /var/mnt/vol1/photo
+    repository: rclone:storage-backup:photo
+    snapshots:
+      tag:
+        - photo
+
+  piracy:
+    inherit: default
+    lock: /tmp/resticprofile-profile-piracy.lock
+    prometheus-save-to-file: /usr/share/resticprofile/piracy.prom
+    backup:
+      source: /var/mnt/vol1/piracy
+    repository: rclone:storage-backup:piracy
+    snapshots:
+      tag:
+        - piracy
+
+  shared-documents:
+    inherit: default
+    lock: /tmp/resticprofile-profile-shared-documents.lock
+    prometheus-save-to-file: /usr/share/resticprofile/shared-documents.prom
+    backup:
+      source: /var/mnt/vol1/shared-documents
+    repository: rclone:storage-backup:shared-documents
+    snapshots:
+      tag:
+        - shared-documents
+
+  minio:
+    inherit: default
+    lock: /tmp/resticprofile-profile-minio.lock
+    prometheus-save-to-file: /usr/share/resticprofile/minio.prom
+    backup:
+      source: /var/mnt/vol2/apps/minio
+    repository: rclone:storage-backup:minio
+    snapshots:
+      tag:
+        - minio
+
+groups:
+  storage-feisar-ovh:
+    profiles:
+      - home
+      - music
+      - photo
+      - piracy
+      - shared-documents
+      - minio

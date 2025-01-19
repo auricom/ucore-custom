@@ -1,0 +1,10 @@
+[Unit]
+Description=Timer for resticprofile forget
+Wants=network-online.target
+
+[Timer]
+OnCalendar=Sun *-*-* 07:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

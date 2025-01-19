@@ -34,6 +34,14 @@ COPY apps/resilio-sync/resilio-sync-helene.volume /usr/share/containers/systemd/
 COPY apps/resilio-sync/config/claude.conf /usr/etc/resilio-sync/claude.conf
 COPY apps/resilio-sync/config/helene.conf /usr/etc/resilio-sync/helene.conf
 
+# Apps - Resticprofile
+COPY apps/resticprofile/profiles.yaml /usr/local/share/resticprofile/profiles.yaml
+COPY apps/resticprofile/repository.sops.key /usr/share/resticprofile/repository.sops.key
+COPY apps/resticprofile/resticprofile-backup.service /etc/systemd/system/
+COPY apps/resticprofile/resticprofile-backup.timer /etc/systemd/system/
+COPY apps/resticprofile/resticprofile-forget.service /etc/systemd/system/
+COPY apps/resticprofile/resticprofile-forget.timer /etc/systemd/system/
+
 # Apps - Scrutiny-collector
 COPY apps/scrutiny-collector/storage.container /usr/share/containers/systemd/scrutiny-collector.container
 COPY apps/scrutiny-collector/storage.sops.env /usr/share/scrutiny-collector/config.sops.env
