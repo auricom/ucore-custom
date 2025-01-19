@@ -14,7 +14,6 @@ ContainerName=resilio-sync-claude
 Image=ghcr.io/auricom/resilio-sync:3.0.0@sha256:6283bb9bc32d5c109da8e658828c930d76114db5cf6e1f152e49e07174feb4c1
 Volume=/usr/etc/resilio-sync/claude.conf:/app/sync.conf:ro
 Volume=resilio-sync-claude:/config:rslave
-Volume=/var/mnt/vol1/backups:/sync/backups:rslave
 Volume=/var/mnt/vol1/shared-documents:/sync/shared-documents:rslave
 Volume=/var/mnt/vol1/photo:/sync/photo:rslave
 Volume=/var/mnt/vol1/home/claude:/sync/home/claude:rslave
