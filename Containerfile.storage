@@ -37,6 +37,7 @@ COPY apps/resilio-sync/config/helene.conf /usr/etc/resilio-sync/helene.conf
 # Apps - Resticprofile
 COPY apps/resticprofile/profiles.yaml /usr/local/share/resticprofile/profiles.yaml
 COPY apps/resticprofile/repository.sops.key /usr/share/resticprofile/repository.sops.key
+COPY apps/resticprofile/resticprofile.sops.env /usr/share/resticprofile/resticprofile.sops.env
 COPY apps/resticprofile/resticprofile-backup.service /etc/systemd/system/
 COPY apps/resticprofile/resticprofile-backup.timer /etc/systemd/system/
 COPY apps/resticprofile/resticprofile-forget.service /etc/systemd/system/
