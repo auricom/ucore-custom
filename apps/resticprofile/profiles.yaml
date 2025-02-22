@@ -10,6 +10,7 @@ profiles:
     initialize: true
     password-file: key
     restic-stale-lock-age: 2h
+    force-inactive-lock: true
     extended-status: true
     no-error-on-warning: true
     prometheus-push: https://pushgateway.xpander.ovh/

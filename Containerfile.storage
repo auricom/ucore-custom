@@ -42,7 +42,7 @@ COPY apps/resticprofile/resticprofile-backup.service /etc/systemd/system/
 COPY apps/resticprofile/resticprofile-backup.timer /etc/systemd/system/
 COPY apps/resticprofile/resticprofile-forget.service /etc/systemd/system/
 COPY apps/resticprofile/resticprofile-forget.timer /etc/systemd/system/
-COPY apps/resticprofile/resticprofile.sh /usr/local/bin/resticprofile-backup.sh
+COPY apps/resticprofile/resticprofile.sh /usr/sbin/resticprofile-backup.sh
 
 # Apps - Scrutiny-collector
 COPY apps/scrutiny-collector/storage.container /usr/share/containers/systemd/scrutiny-collector.container
