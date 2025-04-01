@@ -31,6 +31,9 @@ if [[ "${HOST}" = "storage" ]]; then
     systemctl enable resticprofile-backup.timer
     systemctl enable resticprofile-forget.timer
 
+    # NAS photo sorter
+    systemctl enable nas-photo-sorter.timer
+
     # NFS
     systemctl enable nfs-server.service
 
