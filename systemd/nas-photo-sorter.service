@@ -2,12 +2,12 @@
 Description=nas photo sorter
 After=local-fs.target
 After=network-online.target
-ConditionPathExists=%h/scripts/nas_photo_sorter.sh
+ConditionPathExists=/home/core/scripts/nas_photo_sorter.sh
 ConditionPathExists=/var/mnt/vol1/photo
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/bash -c "%h/scripts/nas_photo_sorter.sh"
+ExecStart=/usr/bin/bash -c "/home/core/scripts/nas_photo_sorter.sh"
 Environment="PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 User=core
 Group=users
