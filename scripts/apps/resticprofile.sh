@@ -3,7 +3,7 @@
 set -ouex pipefail
 
 # renovate: datasource=github-releases depName=creativeprojects/resticprofile
-RESTICPROFILE_VERSION=v0.29.1
+RESTICPROFILE_VERSION=v0.30.0
 
 
 RELEASE_INFO=$(curl -s "https://api.github.com/repos/creativeprojects/resticprofile/releases/tags/${RESTICPROFILE_VERSION}")
