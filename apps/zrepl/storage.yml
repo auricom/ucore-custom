@@ -29,7 +29,7 @@ jobs:
     timestamp_format: dense
   pruning:
     keep_sender:
-    - type: not_replicated
+    # - type: not_replicated
     - type: last_n
       count: 28 # 14 days
     keep_receiver:
