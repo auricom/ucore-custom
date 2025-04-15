@@ -4,7 +4,7 @@ set -ouex pipefail
 
 
 # renovate: datasource=github-releases depName=getsops/sops
-SOPS_VERSION=v3.10.1
+SOPS_VERSION=v3.10.2
 RELEASE_URL="https://api.github.com/repos/getsops/sops/releases/tags/${SOPS_VERSION}"
 
 RPM_URL=$(curl -s "${RELEASE_URL}" | grep -oP '(?<="browser_download_url": ")[^"]*\.x86_64\.rpm')
