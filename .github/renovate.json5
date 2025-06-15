@@ -1,13 +1,15 @@
 {
-    "customManagers": [
+    customManagers: [
         {
-            "customType": "regex",
-            "fileMatch": ["^.*\\.container$"],
-            "matchStrings": [
-                "Image=\"?(?<depName>[^\\s:@\"]+)(?::(?<currentValue>[-a-zA-Z0-9.]+))?(?:@(?<currentDigest>sha256:[a-zA-Z0-9]+))?\"?"
+            customType: 'regex',
+            managerFilePatterns: [
+                '/^.*\\.container$/',
             ],
-            "datasourceTemplate": "docker",
-            "versioningTemplate": "docker"
-        }
-    ]
+            matchStrings: [
+                'Image="?(?<depName>[^\\s:@"]+)(?::(?<currentValue>[-a-zA-Z0-9.]+))?(?:@(?<currentDigest>sha256:[a-zA-Z0-9]+))?"?',
+            ],
+            datasourceTemplate: 'docker',
+            versioningTemplate: 'docker',
+        },
+    ],
 }
