@@ -11,7 +11,7 @@ RestartSec=3
 [Container]
 AutoUpdate=registry
 ContainerName=resilio-sync-helene
-Image=ghcr.io/auricom/resilio-sync:3.0.3@sha256:a835524f9931fa3bb5f0325eaf5528c1b9e190c221bdce744ce65faf423cac3e
+Image=ghcr.io/auricom/resilio-sync:3.0.3@sha256:91b4ecdd4e6de2f5a3d006215de38897fd51e14797f64d7d392e67597871fd15
 Volume=/usr/etc/resilio-sync/helene.conf:/app/sync.conf:ro
 Volume=resilio-sync-helene:/config:rslave
 Volume=/var/mnt/vol1/shared-documents:/sync/shared-documents:rslave
