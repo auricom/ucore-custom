@@ -36,6 +36,8 @@ jobs:
       - type: grid
         regex: ^zrepl_.*
         grid: 1x1h(keep=all) | 24x1h | 35x1d | 6x30d
+  conflict_resolution:
+    initial_replication: all
 - name: local_video
   type: snap
   filesystems: {
