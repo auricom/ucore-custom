@@ -17,7 +17,7 @@ Environment=FB_ROOT=/var/mnt
 Environment=FB_LOG=stdout
 Environment=FB_ADDRESS=0.0.0.0
 Environment=FB_PORT=7000
-Image=ghcr.io/auricom/filebrowser:2.42.5@sha256:9c941e243859f3df037861cf9a1e15f17448eb3cb254892ba674a4b81fbf4a8a
+Image=ghcr.io/auricom/filebrowser:2.42.5@sha256:9d0e31ed0f4bd6c1acca403d2d0282cd7d4592f9f192b4f82140547fc850c097
 Volume=filebrowser.volume:/config
 Volume=/var/mnt/vol1/apps/frigate:/var/mnt/vol1/apps/frigate:bind
 Volume=/var/mnt/vol1/apps/sharry:/var/mnt/vol1/apps/sharry:bind
