@@ -3,7 +3,6 @@ Description=Timer for resticprofile backup
 Wants=network-online.target
 
 [Timer]
-OnCalendar=*-*-* 02:20:00
 OnCalendar=*-*-* 14:20:00
 Persistent=true
 
