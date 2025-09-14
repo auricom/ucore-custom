@@ -11,7 +11,7 @@ RestartSec=3
 [Container]
 AutoUpdate=registry
 ContainerName=podman-exporter
-Image=quay.io/navidys/prometheus-podman-exporter:v1.18.0@sha256:9215f242616c3661e3d4ded60ea3dfc773b71d4908430e5958fd5ae28bc89aef
+Image=quay.io/navidys/prometheus-podman-exporter:v1.18.1@sha256:82a8808744ee9f554b79f6fbb904382ea0d93d1c7ec70e16fdda0d6e452ec06f
 Environment=CONTAINER_HOST=unix:///run/podman/podman.sock
 Volume=/run/podman/podman.sock:/run/podman/podman.sock
 Network=host
