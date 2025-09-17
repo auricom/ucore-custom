@@ -4,15 +4,6 @@ ARG HOST
 
 COPY .sops.yaml /usr/share/sops/
 
-# Apps - Filebrowser
-COPY apps/filebrowser/filebrowser.container /usr/share/containers/systemd/
-COPY apps/filebrowser/filebrowser.volume /usr/share/containers/systemd/
-
-# Apps - Kopia
-COPY apps/kopia/kopia.container /usr/share/containers/systemd/
-COPY apps/kopia/kopia-cache.volume /usr/share/containers/systemd/
-COPY apps/kopia/kopia-logs.volume /usr/share/containers/systemd/
-
 # Apps - Minio
 COPY apps/minio/minio.container /usr/share/containers/systemd/
 COPY apps/minio/config.sops.env /usr/share/minio/config.sops.env
@@ -25,14 +16,6 @@ COPY apps/node-exporter/node-exporter.container /usr/share/containers/systemd/
 
 # Apps - Podman-exporter
 COPY apps/podman-exporter/podman-exporter.container /usr/share/containers/systemd/
-
-# Apps - Resilio-sync
-COPY apps/resilio-sync/resilio-sync-claude.container /usr/share/containers/systemd/
-COPY apps/resilio-sync/resilio-sync-helene.container /usr/share/containers/systemd/
-COPY apps/resilio-sync/resilio-sync-claude.volume /usr/share/containers/systemd/
-COPY apps/resilio-sync/resilio-sync-helene.volume /usr/share/containers/systemd/
-COPY apps/resilio-sync/config/claude.conf /usr/etc/resilio-sync/claude.conf
-COPY apps/resilio-sync/config/helene.conf /usr/etc/resilio-sync/helene.conf
 
 # Apps - Resticprofile
 COPY apps/resticprofile/profiles.yaml /usr/local/share/resticprofile/profiles.yaml
