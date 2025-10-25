@@ -11,7 +11,7 @@ RestartSec=3
 [Container]
 AutoUpdate=registry
 ContainerName=node-exporter
-Image=docker.io/prom/node-exporter:v1.9.1@sha256:d00a542e409ee618a4edc67da14dd48c5da66726bbd5537ab2af9c1dfc442c8a
+Image=docker.io/prom/node-exporter:v1.10.0@sha256:dbb30baa213b9a8c9aff7fe00c124ec371752c92215f014ec6f26159e9c55ff3
 Exec=--path.rootfs=/host
 PodmanArgs=--pid=host
 Volume=/:/host:ro,rslave
