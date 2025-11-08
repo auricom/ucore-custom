@@ -1,4 +1,4 @@
-FROM ghcr.io/ublue-os/ucore-minimal:stable-zfs@sha256:c6572ed917fb742e7b3caf4064abfa13167aa9dca7a4600b50354b5449cf6466
+FROM ghcr.io/ublue-os/ucore-minimal:stable-zfs@sha256:d283fa8c30f91cbc3c1ac3e1173a99eb4f04ddfafc0ec3654cc5acae3faee8d2
 
 ARG HOST
 
